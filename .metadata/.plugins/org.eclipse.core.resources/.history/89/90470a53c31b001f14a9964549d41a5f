@@ -1,0 +1,5 @@
+package co.edu.uco.tiendachepito.business.assembler.dto.concrete;
+
+public class CiudadDTODomainAssembler implements DTODomainAssembler<> {
+
+}

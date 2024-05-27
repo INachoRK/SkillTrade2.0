@@ -1,0 +1,29 @@
+package co.edu.uco.skilltrade.data.dao.factory;
+
+
+import co.edu.uco.skilltrade.data.dao.CursoDAO;
+import co.edu.uco.skilltrade.data.dao.factory.sql.azuresql.AzureSqlDAOFactory;
+
+public abstract class DAOFactory {
+	
+	public static final DAOFactory getFactory(final Factory factory){
+		switch(factory){
+			case AZURE_SQL -> {
+				return new AzureSqlDAOFactory();
+				}
+			}
+		}
+
+	protected abstract void obtenerConexion();
+
+	public abstract void iniciarTransaccion();
+
+	public abstract void confirmarTransaccion();
+
+	public abstract void cancelarTransaccion();
+
+	public abstract void cerrarConexion();
+
+	public abstract CursoDAO getCursoDAO();
+
+}

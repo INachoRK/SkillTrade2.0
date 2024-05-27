@@ -1,0 +1,21 @@
+package co.edu.uco.skilltrade.business.usecase.impl;
+
+import co.edu.uco.skilltrade.business.domain.CiudadDomain;
+import co.edu.uco.skilltrade.business.usecase.RegistrarCiudad;
+import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
+
+public class RegistrarCursoImpl implements RegistrarCiudad {
+
+	private final DAOFactory factory;
+	
+	public RegistrarCiudadImpl(final DAOFactory factory){
+		this.factory = factory;
+	}
+	
+	@Override
+	public void ejecutar(CiudadDomain ciudad) {
+		
+		
+	}
+
+}

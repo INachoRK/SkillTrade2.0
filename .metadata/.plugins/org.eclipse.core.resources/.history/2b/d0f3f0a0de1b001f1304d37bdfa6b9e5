@@ -1,0 +1,5 @@
+package co.edu.uco.skilltrade.data.dao.factory.enums;
+
+public class Factory {
+
+}

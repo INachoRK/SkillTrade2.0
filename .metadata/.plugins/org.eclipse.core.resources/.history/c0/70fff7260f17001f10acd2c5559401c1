@@ -1,0 +1,10 @@
+package co.edu.uco.skilltrade.dto;
+
+import java.util.UUID;
+
+public final class CategoriaDTO {
+	
+	private UUID id;
+	private String nombre;
+
+}

@@ -1,0 +1,28 @@
+package co.edu.uco.skilltrade.business.assembler.entity.concrete;
+
+import co.edu.uco.skilltrade.business.assembler.entity.EntityDomainAssembler;
+import co.edu.uco.skilltrade.business.domain.CursoDomain;
+import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.skilltrade.dto.CursoDTO;
+import co.edu.uco.skilltrade.entity.CursoEntity;
+
+public class CursoEntityDomainAssembler implements EntityDomainAssembler<CursoDomain, CursoEntity> {
+
+	@Override
+	public CursoEntity ensamblarDominio(final CursoEntity entidad) {
+		var cursoEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad, CursoEntity.build(0));
+		return CursoEntity.crear(cursoEntityTmp.getId(), cursoEntityTmp.getTiulo());
+	}
+
+	@Override
+	public CursoDomain ensamblarEntidad(final CursoDomain dominio) {
+		var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear(0, "","",""));
+		return CursoDomain.crear(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), cursoDomainTmp.getCategoria());
+	}
+	/*@Override
+	public CursoEntity ensamblarEntidad(final CursoDomain dominio) {
+		var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear(0, "","",""));
+		return CursoDomain.crear(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), cursoDomainTmp.getCategoria());
+	}*/
+	
+}

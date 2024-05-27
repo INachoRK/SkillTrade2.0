@@ -1,0 +1,41 @@
+package co.edu.uco.tiendachepito.business.domain;
+
+public class CiudadDomain {
+
+	private int id;
+	private String nombre;
+	private DepartamentoDomain departamento;
+	
+	private CiudadDomain(int id, String nombre, DepartamentoDomain departamento) {
+		setId(id);
+		setNombre(nombre);
+		setDepartamento(departamento);
+	}
+
+	private void setId(int id) {
+		this.id = id;
+	}
+
+	private void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	private void setDepartamento(DepartamentoDomain departamento) {
+		this.departamento = departamento;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public DepartamentoDomain getDepartamento() {
+		return departamento;
+	}
+
+	
+	
+}

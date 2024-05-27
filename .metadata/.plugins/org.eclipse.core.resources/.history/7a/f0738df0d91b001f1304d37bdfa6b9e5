@@ -1,0 +1,35 @@
+package co.edu.uco.skilltrade.business.assembler.dto.concrete;
+
+import co.edu.uco.skilltrade.business.assembler.dto.DTODomainAssembler;
+
+import co.edu.uco.skilltrade.business.domain.CursoDomain;
+import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.skilltrade.dto.CursoDTO;
+
+public class CursoDTODomainAssembler implements DTODomainAssembler<CursoDomain, CursoDTO > {
+
+	private static final DTODomainAssembler<CursoDomain, CursoDTO> instancia =
+			new CursoDTODomainAssembler();
+	
+	private CursoDTODomainAssembler() {
+		super ();
+	}
+	
+	public static final DTODomainAssembler<CursoDomain, CursoDTO> obtenerInstancia() {
+		return instancia;
+	}
+	
+	@Override
+	public final CursoDomain ensamblarDominio(final CursoDTO dto) {
+		var cursoDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, new CursoDTO());
+		return CursoDomain.crear(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), cursoDtoTmp.getCategoria());
+	}
+
+	@Override
+	public final CursoDTO ensamblarDTO(final CursoDomain dominio) {
+		var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear());
+		return CursoDTO.build().setId(cursoDomainTmp.getId()).setTitulo(cursoDomainTmp.getTitulo()).
+				setDescripcion(cursoDomainTmp.getDescripcion()).setCategoria(cursoDomainTmp.getCategoria());
+	}
+
+}

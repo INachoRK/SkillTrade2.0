@@ -1,0 +1,11 @@
+1716251119421	Delete element
+1716253931758	Delete element
+1716253936023	Delete element
+1716255030024	Rename type 'BusinessTiendaChepitoException'
+1716255045190	Rename type 'ControllerTiendaChepitoException'
+1716255058016	Rename type 'CrosscuttingTiendaChepitoException'
+1716255070537	Rename type 'DataTiendaChepitoException'
+1716255085200	Rename type 'DTOTiendaChepitoException'
+1716255092773	Rename type 'EntityTiendaChepitoException'
+1716255104461	Rename type 'InitializerTiendaChepitoException'
+1716255159754	Rename type 'TiendaChepitoException'

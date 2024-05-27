@@ -1,0 +1,40 @@
+package co.edu.uco.skilltrade.dto;
+
+import java.util.UUID;
+
+public final class CursoDTO {
+	
+	private UUID id;
+	private String titulo;
+	private String descripcion;
+	private String categoria;
+	
+	private final UUID setId(UUID id) {
+		return this.id = id;
+	}
+	private final String setTitulo(String titulo) {
+		return this.titulo = titulo;
+	}
+	private final String setDescripcion(String descripcion) {
+		return this.descripcion = descripcion;
+	}
+	private final String setCategoria(String categoria) {
+		return this.categoria = categoria;
+	}
+	public final UUID getId() {
+		return id;
+	}
+	public final String getTitulo() {
+		return titulo;
+	}
+	public final String getDescripcion() {
+		return descripcion;
+	}
+	public final String getCategoria() {
+		return categoria;
+	}
+	
+	
+
+}
+

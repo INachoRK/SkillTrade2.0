@@ -1,0 +1,45 @@
+package co.edu.uco.skilltrade.business.facade.concrete;
+
+import co.edu.uco.skilltrade.business.facade.RegistrarCiudadFachada;
+import co.edu.uco.skilltrade.business.usecase.RegistrarCiudad;
+import co.edu.uco.skilltrade.business.usecase.impl.RegistrarCiudadImpl;
+import co.edu.uco.skilltrade.crosscutting.exceptions.SkillTradeException;
+import co.edu.uco.skilltrade.crosscutting.exceptions.custom.BusinessSkillTradeException;
+import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
+import co.edu.uco.skilltrade.dto.CursoDTO;
+
+public class RegistrarCursoFachadaImpl implements RegistrarCiudadFachada {
+	
+	private DAOFactory factory;
+	
+	public RegistrarCiudadFachadaImpl() {
+		factory = DAOFactory.getFactory(Factory.AZURESQL);
+	}
+	
+	public final void ejecutar(final CiudadDTO ciudad) {
+		try {
+			factory.iniciarTransaccion();
+			
+			var ciudadDomain = CiudadDTODomainAssembler.obtenerInstancia().ensamblarDominio();
+			
+			RegistrarCiudad useCase = new RegistrarCiudadImpl(factory);
+			useCase.ejecutar(null);
+			
+			factory.confirmarTransaccion();
+		}catch (final TiendaChepitoException excepcion) {
+			factory.cancelarTransaccion();
+			throw excepcion;
+		}catch (final Exception excepcion) {
+			factory.cancelarTransaccion();
+			
+			var mensajeUsuario = "Se ha presentado un problema tratando de Registrar la información de una nueva ciudad";
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase RegistrarCiudadFchadaImpl. Por favor revise la traza completa del problema";
+		
+			throw new BusinessTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+			
+		} finally {
+			factory.cerrarConexion();
+		}
+	}
+
+}

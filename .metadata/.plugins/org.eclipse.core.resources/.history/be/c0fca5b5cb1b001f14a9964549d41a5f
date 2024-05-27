@@ -1,0 +1,30 @@
+package co.edu.uco.tiendachepito.business.assembler.entity.concrete;
+
+import co.edu.uco.tiendachepito.business.assembler.entity.EntityDomainAssembler;
+import co.edu.uco.tiendachepito.business.domain.DepartamentoDomain;
+import co.edu.uco.tiendachepito.business.domain.PaisDomain;
+import co.edu.uco.tiendachepito.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.tiendachepito.entity.DepartamentoEntity;
+import co.edu.uco.tiendachepito.entity.PaisEntity;
+
+public class DepartamentoEntityDomainAssembler implements EntityDomainAssembler<DepartamentoDomain, DepartamentoEntity> {
+
+	@Override
+	public DepartamentoDomain ensamblarDominio(final DepartamentoDTO dto) {
+		var DepartamentoEntityTmp = ObjectHelper.getObjectHelper().getDefault(dto, new DepartamentoDTO);
+		return DepartamentoDomain.crear(DepartamentoEntityTmp.getId(), DepartamentoEntityTmp.getNombre());
+	}
+
+	@Override
+	public DepartamentoEntity ensamblarEntidad(final DepartamentoDomain dominio) {
+		var DepartamentoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, DepartamentoDomain.crear(0, null));
+		return DepartamentoDomain.crear(DepartamentoDomainTmp.getId(), DepartamentoDomainTmp.getNombre());
+	}
+
+	@Override
+	public DepartamentoDomain ensamblarDominio(DepartamentoEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

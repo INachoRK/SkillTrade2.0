@@ -1,0 +1,36 @@
+package co.edu.uco.skilltrade.business.domain;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+
+public class CursoDomain {
+	
+	private int id;
+	private String nombre;
+	
+	private PaisDomain(int id, String nombre) {
+		setId(id);
+		setNombre(nombre);
+	}
+	
+	private PaisDomain() {
+		setNombre(TextHelper.EMPTY);
+	}
+	
+	public static final PaisDomain crear(final int id, final String nombre) {
+		return new PaisDomain(id, nombre);
+	}
+	
+	public final int getId() {
+		return id;
+	}
+	public final String getNombre() {
+		return nombre;
+	}
+	private final void setId(final int id) {
+		this.id = id;
+	}
+	private final void setNombre(final String nombre) {
+		this.nombre = TextHelper.applyTrim(nombre);
+	}
+	
+}

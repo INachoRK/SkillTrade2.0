@@ -1,0 +1,21 @@
+package co.edu.uco.tiendachepito.business.usecase.impl;
+
+import co.edu.uco.tiendachepito.business.domain.CiudadDomain;
+import co.edu.uco.tiendachepito.business.usecase.RegistrarCiudad;
+import co.edu.uco.tiendachepito.data.dao.factory.DAOFactory;
+
+public class RegistrarCiudadImpl implements RegistrarCiudad {
+
+	private final DAOFactory factory;
+	
+	public RegistrarCiudadImpl(final DAOFactory factory){
+		this.factory = factory;
+	}
+	
+	@Override
+	public void ejecutar(CiudadDomain ciudad) {
+		
+		
+	}
+
+}
