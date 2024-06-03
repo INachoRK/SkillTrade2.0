@@ -9,8 +9,10 @@ import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatal
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.skilltrade.crosscutting.helpers.SQLHelper;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
+import co.edu.uco.skilltrade.data.dao.SesionDAO;
 import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.CursoAzureSqlDAO;
+import co.edu.uco.skilltrade.data.dao.sql.azuresql.SesionAzureSqlDAO;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
 
@@ -22,9 +24,12 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 
 	@Override
 	protected void obtenerConexion() {
-		final String connectionUrl = "jdbc:sqlserver://wednesday.database.windows.net:1433;databaseName=wednesday;user=wednesdayDmlUser;password=w3dn3sd4y!";
+		final String connectionUrl = "jdbc:sqlserver://skilltrade-server.database.windows.net:1433;databaseName=STDB";
+		final String usuario = "Administrador";
+        final String contraseña = "Admin123";
 		try {
-			connection = DriverManager.getConnection(connectionUrl);
+			connection = DriverManager.getConnection(connectionUrl, usuario, contraseña);
+			System.out.println(connection);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
@@ -65,6 +70,11 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 	@Override
 	public CursoDAO getCursoDAO() {
 		return new CursoAzureSqlDAO(connection);
+	}
+
+	@Override
+	public SesionDAO getSesionDAO() {
+		return new SesionAzureSqlDAO(connection);
 	}
 
 }

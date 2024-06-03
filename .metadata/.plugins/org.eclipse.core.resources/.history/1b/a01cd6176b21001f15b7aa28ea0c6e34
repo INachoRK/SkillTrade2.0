@@ -1,0 +1,34 @@
+package co.edu.uco.skilltrade.api.validator.sesion.common;
+
+import java.util.UUID;
+
+import co.edu.uco.skilltrade.api.validator.Result;
+import co.edu.uco.skilltrade.api.validator.Validation;
+import co.edu.uco.skilltrade.crosscutting.utils.UtilObject;
+import co.edu.uco.skilltrade.crosscutting.utils.UtilUUID;
+
+public final class IdentificadorValidation implements Validation<UUID> {
+	
+	private IdentificadorValidation() {
+		super();
+	}
+
+	public static final Result validate(final UUID data) {
+		return new IdentificadorValidation().execute(data);
+	}
+
+	@Override
+	public Result execute(UUID data) {
+
+		var result = Result.create();
+
+		if (UtilObject.isNull(data)) {
+			result.addMessage("¡Al parecer el identificador de la sesion no existe!");
+		} else if (UtilUUID.isDefault(data)) {
+			result.addMessage("Se ha almacenado con el valor de identificador por default, por favor cambialo");
+		}
+
+		return result;
+	}
+
+}

@@ -1,0 +1,5 @@
+package co.edu.uco.skilltrade.business.domain;
+
+public class SesionDomain {
+
+}

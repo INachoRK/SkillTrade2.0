@@ -1,0 +1,81 @@
+package co.edu.uco.skilltrade.business.domain;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.entity.CursoEntity;
+import co.edu.uco.skilltrade.entity.SesionEntity;
+
+public class SesionDomain {
+	
+	private int id;
+	private String titulo;
+	private String descripcion;
+	private byte[] video;
+	
+	private SesionDomain() {
+		setTitulo(TextHelper.EMPTY);
+		setDescripcion(TextHelper.EMPTY);
+		setVideo(video);
+	}
+	
+	private SesionDomain(int id, String titulo, String descripcion, String categoria) {
+		setId(id);
+		setTitulo(titulo);
+		setDescripcion(descripcion);
+		setVideo(video);
+	}
+	
+	public static final SesionDomain crear (final int id, final String titulo, String descripcion, final String categoria) {
+		return new SesionDomain(id, titulo, descripcion, categoria);
+	}
+	
+	public static final SesionDomain crear() {
+		return new SesionDomain();
+	}
+	
+	public final int getId() {
+		return id;
+	}
+
+	public final SesionDomain setId(int id) {
+		this.id = id;
+		return this;
+	}
+
+	public final String getTitulo() {
+		return titulo;
+	}
+
+	public final SesionDomain setTitulo(String titulo) {
+		this.titulo = TextHelper.applyTrim(titulo);
+		return this;
+	}
+
+	public final String getDescripcion() {
+		return descripcion;
+	}
+
+	public final SesionDomain setDescripcion(String descripcion) {
+		this.descripcion = TextHelper.applyTrim(descripcion);
+		return this;
+	}
+
+	public final byte[] getVideo() {
+		return video;
+	}
+
+	public final SesionDomain setVideo(byte[] video) {
+		this.video = video;
+		return this;
+	}
+
+	public CursoEntity getCurso() {
+		return curso;
+	}
+
+	public SesionDomain setCurso(CursoEntity curso) {
+		this.curso = ObjectHelper.getObjectHelper().getDefault(curso, CursoEntity.build());
+		return this;
+	}
+
+}

@@ -1,0 +1,75 @@
+package co.edu.uco.skilltrade.entity;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.dto.CursoDTO;
+
+public final class SesionEntity {
+	
+	private int id;
+	private String titulo;
+	private String descripcion;
+	private byte[] video;
+	private CursoDTO curso;
+	
+	private SesionEntity(final int id) {
+		setTitulo(TextHelper.EMPTY);
+		setDescripcion(TextHelper.EMPTY);
+		setVideo(video);
+		setCurso(CursoDTO.build());
+	}
+	
+	private SesionEntity(int id, String titulo, String descripcion, String categoria) {
+		setId(id);
+		setTitulo(titulo);
+		setDescripcion(descripcion);
+		setVideo(video);
+		setCurso(CursoDTO.build());
+	}
+	
+	public static final SesionEntity build (final int id, final String titulo, String descripcion, final String categoria, final CursoDTO curso) {
+		return new SesionEntity(id, titulo, descripcion, categoria);
+	}
+	
+	public static final SesionEntity build() {
+		return new SesionEntity(NumericHelper.ZERO);
+	}
+	
+	public final int getId() {
+		return id;
+	}
+	public final SesionEntity setId(int id) {
+		this.id = id;
+		return this;
+	}
+	public final String getTitulo() {
+		return titulo;
+	}
+	public final SesionEntity setTitulo(String titulo) {
+		this.titulo = TextHelper.applyTrim(titulo);
+		return this;
+	}
+	public final String getDescripcion() {
+		return descripcion;
+	}
+	public final SesionEntity setDescripcion(String descripcion) {
+		this.descripcion = TextHelper.applyTrim(descripcion);
+		return this;
+	}
+	public final byte[] getVideo() {
+		return video;
+	}  
+	public final SesionEntity setVideo(byte[] video) {
+		this.video = video;
+		return this;
+	}
+
+	public CursoEntity getCurso() {
+		return curso;
+	}
+
+	public void setCurso(CursoDTO curso) {
+		this.curso = curso;
+	}
+	
+}

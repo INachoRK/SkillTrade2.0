@@ -1,0 +1,5 @@
+package co.edu.uco.skilltrade.entity;
+
+public final class SesionEntity {
+
+}

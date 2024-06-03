@@ -1,0 +1,58 @@
+package co.edu.uco.skilltrade.business.domain;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+
+public class SesionDomain {
+	
+	private int id;
+	private String titulo;
+	private String descripcion;
+	private byte[] video;
+	
+	private SesionDomain() {
+		setTitulo(TextHelper.EMPTY);
+		setDescripcion(TextHelper.EMPTY);
+		setVideo(video);
+	}
+	
+	private SesionDomain(int id, String titulo, String descripcion, String categoria) {
+		setId(id);
+		setTitulo(titulo);
+		setDescripcion(descripcion);
+		setVideo(video);
+	}
+	
+	public static final SesionDomain crear (final int id, final String titulo, String descripcion, final String categoria) {
+		return new SesionDomain(id, titulo, descripcion, categoria);
+	}
+	
+	public static final SesionDomain crear() {
+		return new SesionDomain();
+	}
+	
+	public final int getId() {
+		return id;
+	}
+	private final void setId(int id) {
+		this.id = id;
+	}
+	public final String getTitulo() {
+		return titulo;
+	}
+	private final void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public final String getDescripcion() {
+		return descripcion;
+	}
+	private final void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public final byte[] getVideo() {
+		return video;
+	}
+	private final void setVideo(byte[] video) {
+		this.video = video;
+	}
+
+}

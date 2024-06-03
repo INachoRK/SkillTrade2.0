@@ -24,13 +24,13 @@ public class CursoEntityDomainAssembler implements EntityDomainAssembler<CursoDo
 	@Override
     public final CursoDomain ensamblarDominio(final CursoEntity entidad) {
         var cursoEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad,CursoEntity.build());
-        return CursoDomain.crear(cursoEntityTmp.getId(), cursoEntityTmp.getTitulo(), cursoEntityTmp.getDescripcion(), cursoEntityTmp.getCategoria());
+        return CursoDomain.crear(cursoEntityTmp.getId(), cursoEntityTmp.getTitulo(), cursoEntityTmp.getDescripcion(), cursoEntityTmp.getCategoria(), cursoEntityTmp.getSubcategoria());
     }
 
     @Override
     public final CursoEntity ensamblarEntidad(final CursoDomain dominio) {
         var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear());
-        return CursoEntity.build(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), cursoDomainTmp.getCategoria());
+        return CursoEntity.build(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), cursoDomainTmp.getCategoria(), cursoDomainTmp.getSubcategoria());
     }
 
     @Override

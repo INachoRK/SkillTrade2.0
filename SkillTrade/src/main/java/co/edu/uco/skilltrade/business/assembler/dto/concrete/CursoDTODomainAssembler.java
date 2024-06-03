@@ -25,14 +25,14 @@ public class CursoDTODomainAssembler implements DTODomainAssembler<CursoDomain, 
 	@Override
 	public final CursoDomain ensamblarDominio(final CursoDTO dto) {
 		var cursoDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, new CursoDTO());
-		return CursoDomain.crear(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), cursoDtoTmp.getCategoria());
+		return CursoDomain.crear(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), cursoDtoTmp.getCategoria(), cursoDtoTmp.getSubcategoria());
 	}
 
 	@Override
 	public final CursoDTO ensamblarDTO(final CursoDomain dominio) {
 		var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear());
 		return CursoDTO.build().setId(cursoDomainTmp.getId()).setTitulo(cursoDomainTmp.getTitulo()).
-				setDescripcion(cursoDomainTmp.getDescripcion()).setCategoria(cursoDomainTmp.getCategoria());
+				setDescripcion(cursoDomainTmp.getDescripcion()).setCategoria(cursoDomainTmp.getCategoria()).setSubcategoria(cursoDomainTmp.getSubcategoria());
 	}
 	
 	@Override

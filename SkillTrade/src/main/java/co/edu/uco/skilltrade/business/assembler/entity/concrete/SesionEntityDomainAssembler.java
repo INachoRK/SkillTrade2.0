@@ -1,0 +1,57 @@
+package co.edu.uco.skilltrade.business.assembler.entity.concrete;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import co.edu.uco.skilltrade.business.assembler.entity.EntityDomainAssembler;
+import co.edu.uco.skilltrade.business.domain.CursoDomain;
+import co.edu.uco.skilltrade.business.domain.SesionDomain;
+import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.skilltrade.entity.CursoEntity;
+import co.edu.uco.skilltrade.entity.SesionEntity;
+
+public class SesionEntityDomainAssembler implements EntityDomainAssembler<SesionDomain, SesionEntity> {
+	
+	private static final EntityDomainAssembler<SesionDomain, SesionEntity> instancia = new SesionEntityDomainAssembler();
+	
+	private static final EntityDomainAssembler<CursoDomain, CursoEntity> cursoAssembler = CursoEntityDomainAssembler
+            .obtenerInstancia();
+
+	private SesionEntityDomainAssembler() {
+        super();
+    }
+	
+	public static final EntityDomainAssembler<SesionDomain, SesionEntity> obtenerInstancia(){
+        return instancia;
+    }
+
+	@Override
+    public final SesionDomain ensamblarDominio(final SesionEntity entidad) {
+        var sesionEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad, SesionEntity.build());
+        var cursoDomain = cursoAssembler.ensamblarDominio(sesionEntityTmp.getCurso());
+        
+        return SesionDomain.crear(sesionEntityTmp.getId(), sesionEntityTmp.getTitulo(), sesionEntityTmp.getDescripcion(), sesionEntityTmp.getVideo(), cursoDomain);
+    }
+
+    @Override
+    public final SesionEntity ensamblarEntidad(final SesionDomain dominio) {
+        var sesionDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, SesionDomain.crear());
+        var cursoEntity = cursoAssembler.ensamblarEntidad(sesionDomainTmp.getCurso());
+        
+        return SesionEntity.build(sesionDomainTmp.getId(), sesionDomainTmp.getTitulo(), sesionDomainTmp.getDescripcion(), sesionDomainTmp.getVideo(), cursoEntity);
+    }
+
+    @Override
+    public final List<SesionDomain> ensamblarListaDominios(List<SesionEntity> listaEntidades) {
+        var listaEntidadesTmp = ObjectHelper.getObjectHelper().getDefault(listaEntidades, new ArrayList<SesionEntity>());
+        var resultados = new ArrayList<SesionDomain>();
+
+        for (SesionEntity sesionEntity : listaEntidadesTmp) {
+            var sesionDomainTmp = ensamblarDominio(sesionEntity);
+            resultados.add(sesionDomainTmp);
+        }
+        return resultados;
+    }
+	
+}

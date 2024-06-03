@@ -1,0 +1,6 @@
+package co.edu.uco.skilltrade.data.dao.sql.azuresql;
+
+public class SesionAzureSqlDAO {
+
+}
+SesionDTO

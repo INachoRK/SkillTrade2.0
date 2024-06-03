@@ -10,19 +10,22 @@ public final class CursoDTO {
 	private String titulo;
 	private String descripcion;
 	private String categoria;
+	private String subcategoria;
 	
 	public CursoDTO() {
 		setId(NumericHelper.ZERO);
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
 		setCategoria(TextHelper.EMPTY);
+		setSubcategoria(TextHelper.EMPTY);
 	}
 	
-	public CursoDTO(int id, String titulo, String descripcion, String categoria) {
+	public CursoDTO(int id, String titulo, String descripcion, String categoria, String subcategoria) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
 		setCategoria(categoria);
+		setSubcategoria(subcategoria);
 	}
 	
 	public static final CursoDTO build() {
@@ -49,6 +52,11 @@ public final class CursoDTO {
 		return this;
 	}
 	
+	public CursoDTO setSubcategoria(String subcategoria) {
+		this.subcategoria = TextHelper.applyTrim(subcategoria);
+		return this;
+	}
+	
 	public final int getId() {
 		return id;
 	}
@@ -64,6 +72,12 @@ public final class CursoDTO {
 	public final String getCategoria() {
 		return categoria;
 	}
+
+	public String getSubcategoria() {
+		return subcategoria;
+	}
+
+	
 	
 }
 

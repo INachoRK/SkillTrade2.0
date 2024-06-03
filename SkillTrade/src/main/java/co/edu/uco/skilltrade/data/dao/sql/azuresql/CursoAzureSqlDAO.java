@@ -21,17 +21,20 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 	public final void crear(final CursoEntity entidad) {
 		final var sentenciaSql = new StringBuilder();
 		
-		sentenciaSql.append("INSERT INTO Curso");
-		sentenciaSql.append("VALUES('?', '?', '?', '?')");
-		
+		sentenciaSql.append("INSERT INTO dbo.Curso ");
+		sentenciaSql.append("(titulo, descripcion, categoria, subcategoria) ");
+		sentenciaSql.append("VALUES (?, ?, ?, ?)");
+				
         try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())){
-            sentenciaPreparada.setString(2, entidad.getTitulo());
-            sentenciaPreparada.setString(3, entidad.getDescripcion());
-            sentenciaPreparada.setString(4, entidad.getCategoria());
+        	sentenciaPreparada.setString(1, entidad.getTitulo());
+            sentenciaPreparada.setString(2, entidad.getDescripcion());
+            sentenciaPreparada.setString(3, entidad.getCategoria());
+            sentenciaPreparada.setString(4, entidad.getSubcategoria());
+            
 
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
+            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo curso. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00021, entidad.getTitulo());
 
             throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
