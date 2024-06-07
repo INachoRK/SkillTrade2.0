@@ -31,12 +31,12 @@ public final class SesionAzureSqlDAO extends SqlConnection implements SesionDAO 
 
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00026);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00021, entidad.getTitulo());
 
             throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
         }catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00026);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00022, entidad.getTitulo());
 
             throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
@@ -50,7 +50,7 @@ public final class SesionAzureSqlDAO extends SqlConnection implements SesionDAO 
 		
 		sentenciaSql.append("UPDATE Curso");
 		sentenciaSql.append("SET Titulo = ''");
-		sentenciaSql.append("WHERE id = 1");
+		sentenciaSql.append("WHERE id = ?");
 
 	}
 
@@ -58,7 +58,7 @@ public final class SesionAzureSqlDAO extends SqlConnection implements SesionDAO 
 		final var sentenciaSql = new StringBuilder();
 		
 		sentenciaSql.append("DELETE FROM Curso");
-		sentenciaSql.append("WHERE id = 1");
+		sentenciaSql.append("WHERE id = ?");
 	}
 
 	@Override
@@ -67,10 +67,16 @@ public final class SesionAzureSqlDAO extends SqlConnection implements SesionDAO 
 		final var sentenciaSql = new StringBuilder();
 		
 		sentenciaSql.append("SELECT id, nombre");
-		sentenciaSql.append("FROM Pais");
+		sentenciaSql.append("FROM Curso");
 		sentenciaSql.append("ORDER BY nombre ASC");
 		
 		return null;
+	}
+
+	@Override
+	public boolean consultarLogin(SesionEntity entidad) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

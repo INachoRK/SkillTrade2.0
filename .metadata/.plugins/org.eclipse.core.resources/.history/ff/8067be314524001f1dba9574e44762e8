@@ -1,0 +1,59 @@
+package co.edu.uco.skilltrade.api.controller;
+
+import org.slf4j.Logger;
+
+
+
+
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import co.edu.uco.skilltrade.api.controller.response.usuario.UsuarioResponse;
+import co.edu.uco.skilltrade.business.facade.concrete.ConsultarUsuarioFachadaImpl;
+import co.edu.uco.skilltrade.crosscutting.exceptions.SkillTradeException;
+import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
+import co.edu.uco.skilltrade.dto.UsuarioDTO;
+
+
+
+@RestController
+@RequestMapping("skilltrade/api/v1/usuario")
+public final class UsuarioController {
+	
+	Logger logger = LoggerFactory.getLogger(UsuarioDTO.class);
+	
+	@GetMapping("/dummy")
+	public UsuarioDTO dummy() {
+		return UsuarioDTO.build();
+	}
+	
+	@GetMapping
+    public ResponseEntity<UsuarioResponse> Consultar (
+            @RequestParam(required = false,defaultValue = "") String correo,
+            @RequestParam(required = false, defaultValue = "")String password){
+		UsuarioResponse usuarioResponse = UsuarioResponse.build();
+        HttpStatus httpStatusResponse = HttpStatus.OK;
+
+        try {
+            final var usuarioDtoFilter = UsuarioDTO.build().setCorreo(correo).setPassword(password);
+            final ConsultarUsuarioFachadaImpl fachada = new ConsultarUsuarioFachadaImpl();
+            usuarioResponse.setDatos(fachada.ejecutar(usuarioDtoFilter));
+            usuarioResponse.getMensajes().add("Acceso autorizado");
+        } catch (final SkillTradeException exception){
+            exception.printStackTrace();
+            usuarioResponse.getMensajes().add(exception.getMensajeUsuario());
+            httpStatusResponse = HttpStatus.BAD_REQUEST;
+        } catch (final Exception exception){
+            exception.printStackTrace();
+            usuarioResponse.getMensajes().add("se ha presentado un problema inesperado");
+            httpStatusResponse = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(paisResponse, httpStatusResponse);
+    }
+
+}

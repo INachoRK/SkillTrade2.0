@@ -1,0 +1,48 @@
+package co.edu.uco.skilltrade.business.facade.concrete;
+
+
+import co.edu.uco.skilltrade.business.assembler.dto.concrete.CursoDTODomainAssembler;
+import co.edu.uco.skilltrade.business.facade.RegistrarCursoFachada;
+import co.edu.uco.skilltrade.business.usecase.RegistrarCurso;
+import co.edu.uco.skilltrade.business.usecase.impl.RegistrarCursoImpl;
+import co.edu.uco.skilltrade.crosscutting.exceptions.SkillTradeException;
+import co.edu.uco.skilltrade.crosscutting.exceptions.custom.BusinessSkillTradeException;
+import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
+import co.edu.uco.skilltrade.data.dao.factory.enums.Factory;
+import co.edu.uco.skilltrade.dto.CursoDTO;
+
+public class RegistrarCursoFachadaImpl implements RegistrarCursoFachada {
+	
+	private DAOFactory factory;
+	
+	public RegistrarCursoFachadaImpl() {
+		factory = DAOFactory.getFactory(Factory.AZURE_SQL);
+	}
+	
+	public final void ejecutar(final CursoDTO curso) {
+		try {
+			factory.iniciarTransaccion();
+			
+			var cursoDomain = CursoDTODomainAssembler.obtenerInstancia().ensamblarDominio(curso);
+			
+			RegistrarCurso useCase = new RegistrarCursoImpl(factory);
+			useCase.ejecutar(cursoDomain);
+			
+			factory.confirmarTransaccion();
+		}catch (final SkillTradeException excepcion) {
+			factory.cancelarTransaccion();
+			throw excepcion;
+		}catch (final Exception excepcion) {
+			factory.cancelarTransaccion();
+			
+			var mensajeUsuario = "Se ha presentado un problema tratando de Registrar la información de un nuevo curso";
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase RegistrarCiudadFchadaImpl. Por favor revise la traza completa del problema";
+		
+			throw new BusinessSkillTradeException(mensajeTecnico, mensajeUsuario);
+			
+		} finally {
+			factory.cerrarConexion();
+		}
+	}
+
+}

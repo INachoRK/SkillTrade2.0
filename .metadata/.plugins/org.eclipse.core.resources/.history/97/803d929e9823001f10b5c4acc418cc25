@@ -1,0 +1,85 @@
+package co.edu.uco.skilltrade.entity;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+
+public final class UsuarioEntity {
+	
+	private int id;
+	private String titulo;
+	private String descripcion;
+	private String categoria;
+	private String subcategoria;
+	
+	private UsuarioEntity(final int id) {
+		setTitulo(TextHelper.EMPTY);
+		setDescripcion(TextHelper.EMPTY);
+		setCategoria(TextHelper.EMPTY);
+		setSubcategoria(TextHelper.EMPTY);
+	}
+	
+	
+	private UsuarioEntity(int id, String titulo, String descripcion, String categoria, String subcategoria) {
+		setId(id);
+		setTitulo(titulo);
+		setDescripcion(descripcion);
+		setCategoria(categoria);
+		setSubcategoria(subcategoria);
+	}
+	
+	public static final UsuarioEntity build (final int id, final String titulo, String descripcion, final String categoria, final String subcategoria) {
+		return new UsuarioEntity(id, titulo, descripcion, categoria, subcategoria);
+	}
+	
+	public static final UsuarioEntity build() {
+		return new UsuarioEntity(NumericHelper.ZERO);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+	
+	public String getSubcategoria() {
+		return subcategoria;
+	}
+
+
+	private UsuarioEntity setId(int id) {
+		this.id = id;
+		return this;
+	}
+
+	private UsuarioEntity setTitulo(String titulo) {
+		this.titulo = TextHelper.applyTrim(titulo);
+		return this;
+	}
+
+	private UsuarioEntity setDescripcion(String descripcion) {
+		this.descripcion = TextHelper.applyTrim(descripcion);
+		return this;
+	}
+
+	private UsuarioEntity setCategoria(String categoria) {
+		this.categoria =  TextHelper.applyTrim(categoria);
+		return this;
+	}
+
+	
+	public UsuarioEntity setSubcategoria(String subcategoria) {
+		this.subcategoria =  TextHelper.applyTrim(subcategoria);
+		return this;
+	}
+
+}

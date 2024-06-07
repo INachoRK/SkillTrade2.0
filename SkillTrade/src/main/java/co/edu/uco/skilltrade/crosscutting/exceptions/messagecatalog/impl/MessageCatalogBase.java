@@ -60,8 +60,45 @@ public final class MessageCatalogBase implements MessageCatalog {
 				"Se ha intentado confirmar una transacción cuando el autocommit de la conexión con la base de datos estaba activada..."));
 		mensajes.put(CodigoMensaje.M00022.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
 				"Se ha presentado un problema tratando de confirmar una transacción SQL con la fuente de información deseada..."));
+		mensajes.put(CodigoMensaje.M00023.getIdentificador(), new Mensaje(CodigoMensaje.M00023,
+				"No es posible crear el DAO deseado, dado que la conexion SQL esta cerrada"));
+		mensajes.put(CodigoMensaje.M00024.getIdentificador(), new Mensaje(CodigoMensaje.M00024,
+				"No ha sido posible llevar a cabo el registro de la información del nuevo usuario. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00025.getIdentificador(), new Mensaje(CodigoMensaje.M00025,
+				"No ha sido posible llevar a cabo la consulta del usuario. Por favor intente de nuevo y en caso de persisitir el problema, comuníquese con el administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00026.getIdentificador(), new Mensaje(CodigoMensaje.M00026,
+				"No ha sido posible llevar a cabo el registro de la información de la nueva sesión. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00027.getIdentificador(), new Mensaje(CodigoMensaje.M00027,
+				"No ha sido posible llevar a cabo el registro de la información del nuevo curso. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00028.getIdentificador(), new Mensaje(CodigoMensaje.M00028,
+				"Se ha presentado un problema tratando de Registrar la información de una nueva sesión."));
+		mensajes.put(CodigoMensaje.M00029.getIdentificador(), new Mensaje(CodigoMensaje.M00029,
+				"Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase RegistrarSesionFachadaImpl. Por favor revise la traza completa del problema."));
+		mensajes.put(CodigoMensaje.M00030.getIdentificador(), new Mensaje(CodigoMensaje.M00030,
+				"Se ha presentado un problema tratando de Registrar la información de un nuevo curso"));
+		mensajes.put(CodigoMensaje.M00031.getIdentificador(), new Mensaje(CodigoMensaje.M00031,
+				"Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase RegistrarCursoFachadaImpl. Por favor revise la traza completa del problema."));
+		mensajes.put(CodigoMensaje.M00032.getIdentificador(), new Mensaje(CodigoMensaje.M00032,
+				"Se ha presentado un problema tratando de consultar la información del usuario deseado."));
+		mensajes.put(CodigoMensaje.M00033.getIdentificador(), new Mensaje(CodigoMensaje.M00033,
+				"Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase ConsultarUsuarioFachadaImpl. Por favor revise la traza completa del problema."));
+		mensajes.put(CodigoMensaje.M00034.getIdentificador(), new Mensaje(CodigoMensaje.M00034,
+				"Se ha presentado un problema tratando de obtener la conexión con la base de datos STDB en el servidor de bases de datos skilltrade-server.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema..."));
+		mensajes.put(CodigoMensaje.M00035.getIdentificador(), new Mensaje(CodigoMensaje.M00035,
+				"Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos STDB en el servidor de bases de datos skilltrade-server.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema..."));
+		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
+				"No ha sido posible consultar la información de los usuarios. Por favor, inténtelo de nuevo o comuníquese con el administrador de SkillTrade."));
+		mensajes.put(CodigoMensaje.M00037.getIdentificador(), new Mensaje(CodigoMensaje.M00037,
+				"Se ha presentado un problema INESPERADO intentando consultar al ususario deseado en la bsae de datos SQL, si el problema persiste póngase en contacto con un administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00038.getIdentificador(), new Mensaje(CodigoMensaje.M00038,
+				"No ha sido posible llevar a cabo la eliminacion de la informacion del usuario deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de SkillTrade..."));
+		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
+				"Se ha presentado un problema INESPERADO tratando de eliminar la información del usuario seleccionado de la base de datos. Por favor intente de nuevo y si el problema persiste póngase en contacto con un administrador de SkillTrade."));
+		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
+				"No existe el usuario que está buscando, verifique la información y vuelva a intentarlo, en caso de no "));
 
 	}
+
 
 	@Override
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
@@ -88,11 +125,6 @@ public final class MessageCatalogBase implements MessageCatalog {
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
 			throw new CrosscuttingSkillTradeException(mensajeTecnico, mensajeUsuario);
 		}
-
-		// TODO: Tarea: asegure que si tiene parámetros, el contenido
-		// del mensaje se retorne con los parámetros reemplazados
-		// {1}, {2}, {3}
-
 		return mensajes.get(codigo.getIdentificador());
 	}
 

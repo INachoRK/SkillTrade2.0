@@ -1,4 +1,5 @@
 codetogether.main.view.displayed=true
+com.genuitec.eclipse.codetogether.ui.showed.ports.upsell=true
 default.auth=prompt
 default.cursor=JOIN_CURSOR_PERSONAL
 default.drive=all

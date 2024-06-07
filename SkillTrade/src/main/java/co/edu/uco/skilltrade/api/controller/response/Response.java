@@ -6,7 +6,7 @@ import java.util.List;
 
 import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
 
-public final class Response<T> {
+public class Response<T> {
 	
 	private List<T> data;
 	private List<String> messages;
@@ -33,8 +33,8 @@ public final class Response<T> {
 		return messages;
 	}
 
-	public final void setMessages(List<String> messages) {
-		this.messages = ObjectHelper.getObjectHelper().getDefault(messages, new ArrayList<>());
+	public final List<String> setMessages(List<String> messages) {
+		return this.messages = ObjectHelper.getObjectHelper().getDefault(messages, new ArrayList<>());
 	}
 
 }

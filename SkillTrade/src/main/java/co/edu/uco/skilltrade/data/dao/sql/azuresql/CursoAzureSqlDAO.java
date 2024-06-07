@@ -31,15 +31,14 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
             sentenciaPreparada.setString(3, entidad.getCategoria());
             sentenciaPreparada.setString(4, entidad.getSubcategoria());
             
-
             sentenciaPreparada.executeUpdate();
         } catch (SQLException exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo curso. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00021, entidad.getTitulo());
 
             throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
         }catch (final Exception exception){
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la informacion del nuevo pais. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de la Tienda Chepito...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
             var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00022, entidad.getTitulo());
 
             throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
@@ -52,8 +51,26 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 		final var sentenciaSql = new StringBuilder();
 		
 		sentenciaSql.append("UPDATE Curso");
-		sentenciaSql.append("SET Titulo = ''");
-		sentenciaSql.append("WHERE id = 1");
+		sentenciaSql.append("SET Titulo = ?");
+		sentenciaSql.append("WHERE id = ?");
+		
+		try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())){
+        	sentenciaPreparada.setString(1, entidad.getTitulo());
+            
+            
+
+            sentenciaPreparada.executeUpdate();
+        } catch (SQLException exception){
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00021, entidad.getTitulo());
+
+            throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
+        }catch (final Exception exception){
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00022, entidad.getTitulo());
+
+            throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, exception);
+        }
 
 	}
 
@@ -74,6 +91,12 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 		sentenciaSql.append("ORDER BY nombre ASC");
 		
 		return null;
+	}
+
+	@Override
+	public boolean consultarLogin(CursoEntity entidad) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

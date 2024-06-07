@@ -1,0 +1,22 @@
+package co.edu.uco.skilltrade.business.usecase.impl;
+
+import co.edu.uco.skilltrade.business.assembler.entity.concrete.UsuarioEntityDomainAssembler;
+import co.edu.uco.skilltrade.business.domain.UsuarioDomain;
+import co.edu.uco.skilltrade.business.usecase.ConsultarUsuario;
+import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
+
+public class ConsultarUsuarioImpl implements ConsultarUsuario {
+
+	private final DAOFactory factory;
+	
+	public ConsultarUsuarioImpl(final DAOFactory factory){
+		this.factory = factory;
+	}
+	
+	@Override
+	public void ejecutar(UsuarioDomain usuario) {
+		var usuarioEntity = UsuarioEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(usuario);
+        factory.getUsuarioDAO().consultar(usuarioEntity);
+	}
+
+}

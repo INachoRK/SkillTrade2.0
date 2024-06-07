@@ -1,0 +1,12 @@
+package co.edu.uco.skilltrade.business.assembler.dto;
+
+import java.util.List;
+
+public interface DTOEntityAssembler<D, E> {
+
+	D ensamblarDominio (E dto);
+	
+	E ensamblarDTO (D entity);
+	
+	List<E> ensamblarListaDTO(List<D> listaDominios);
+}

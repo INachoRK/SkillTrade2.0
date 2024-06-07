@@ -1,0 +1,36 @@
+package co.edu.uco.skilltrade.api.controller.response.usuario;
+
+import java.util.ArrayList;
+
+import org.apache.catalina.connector.Response;
+import co.edu.uco.skilltrade.dto.UsuarioDTO;
+
+public class UsuarioResponse extends Response<UsuarioDTO> {
+
+    public static final UsuarioResponse build(final List<String> mensajes, final List<UsuarioDTO> datos) {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(mensajes);
+        instance.setDatos(datos);
+
+        return instance;
+    }
+
+    public static final UsuarioResponse build(final List<UsuarioDTO> datos) {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(new ArrayList<>());
+        instance.setDatos(datos);
+
+        return instance;
+    }
+
+    public static final UsuarioResponse build() {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(new ArrayList<>());
+        instance.setDatos(new ArrayList<>());
+
+        return instance;
+    }
+}

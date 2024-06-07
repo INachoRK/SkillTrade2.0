@@ -37,7 +37,7 @@ public class SesionDomain {
 		return id;
 	}
 
-	public final SesionDomain setId(int id) {
+	private final SesionDomain setId(int id) {
 		this.id = id;
 		return this;
 	}
@@ -46,7 +46,7 @@ public class SesionDomain {
 		return titulo;
 	}
 
-	public final SesionDomain setTitulo(String titulo) {
+	private final SesionDomain setTitulo(String titulo) {
 		this.titulo = TextHelper.applyTrim(titulo);
 		return this;
 	}
@@ -55,7 +55,7 @@ public class SesionDomain {
 		return descripcion;
 	}
 
-	public final SesionDomain setDescripcion(String descripcion) {
+	private final SesionDomain setDescripcion(String descripcion) {
 		this.descripcion = TextHelper.applyTrim(descripcion);
 		return this;
 	}
@@ -64,7 +64,7 @@ public class SesionDomain {
 		return video;
 	}
 
-	public final SesionDomain setVideo(byte[] video) {
+	private final SesionDomain setVideo(byte[] video) {
 		this.video = video;
 		return this;
 	}
@@ -73,7 +73,7 @@ public class SesionDomain {
 		return curso;
 	}
 
-	public final SesionDomain setCurso(CursoDomain curso) {
+	private final SesionDomain setCurso(CursoDomain curso) {
 		this.curso = ObjectHelper.getObjectHelper().getDefault(curso, CursoDomain.crear());
 		return this;
 	}

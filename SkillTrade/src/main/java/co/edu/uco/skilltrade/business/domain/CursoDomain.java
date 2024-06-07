@@ -34,27 +34,27 @@ public class CursoDomain {
 		return new CursoDomain();
 	}
 	
-	public final CursoDomain setId(final int id) {
+	private final CursoDomain setId(final int id) {
 		this.id = id;
 		return this;
 	}
 	
-	public final CursoDomain setTitulo(String titulo) {
+	private final CursoDomain setTitulo(String titulo) {
 		this.titulo = TextHelper.applyTrim(titulo);
 		return this;
 	}
 	
-	public final CursoDomain setDescripcion(String descripcion) {
+	private final CursoDomain setDescripcion(String descripcion) {
 		this.descripcion = TextHelper.applyTrim(descripcion);
 		return this;
 	}
 	
-	public final CursoDomain setCategoria(String categoria) {
+	private final CursoDomain setCategoria(String categoria) {
 		this.categoria = TextHelper.applyTrim(categoria);
 		return this;
 	}
 	
-	public final CursoDomain setSubcategoria(String subcategoria) {
+	private final CursoDomain setSubcategoria(String subcategoria) {
 		this.subcategoria = TextHelper.applyTrim(subcategoria);
 		return this;
 	}

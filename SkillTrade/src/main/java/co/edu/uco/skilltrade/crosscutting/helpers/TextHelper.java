@@ -6,6 +6,8 @@ public final class TextHelper {
 
 	public static final String EMPTY = "";
 	public static final String UNDERLINE = "_";
+	public static final String EMAIL_RE = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
 	private TextHelper() {
 		super();
@@ -42,5 +44,17 @@ public final class TextHelper {
 
 		return sb.toString();
 	}
+	
+	public final static boolean matchPattern(final String text, final String pattern) {
+		return getDefault(text).matches(getDefault(pattern));
+	}
+
+	public static final boolean emailStringIsValid(final String emailValue) {
+		return (TextHelper.matchPattern(emailValue, EMAIL_RE));
+	}
+	
+	public static boolean isPasswordValid(final String password) {
+        return TextHelper.matchPattern(password, PASSWORD_PATTERN);
+    }
 
 }

@@ -36,7 +36,8 @@ public final class SQLHelper {
 	}
 	public static final void close(final Connection connection) {
 		try {
-		if(!isOpen(connection)) {
+		
+		if (isNull(connection) || connection.isClosed()) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00009);
 			
@@ -64,6 +65,7 @@ public final class SQLHelper {
 	public static final void commit(final Connection connection) {
 		
 		try {
+			
 			if(!isOpen(connection)) {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00012);
@@ -97,6 +99,7 @@ public final class SQLHelper {
 	
 	public static final void rollback(final Connection connection) {
 		try {
+			
 			if(!isOpen(connection)) {
 				var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 				var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00016);

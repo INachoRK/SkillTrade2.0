@@ -1,0 +1,54 @@
+package co.edu.uco.skilltrade.api.controller.response.usuario;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import co.edu.uco.skilltrade.api.controller.response.Response;
+import co.edu.uco.skilltrade.dto.UsuarioDTO;
+
+public class UsuarioResponse extends Response<UsuarioDTO> {
+
+    public static final UsuarioResponse build(final List<String> mensajes, final List<UsuarioDTO> datos) {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(mensajes);
+        instance.setDatos(datos);
+
+        return instance;
+    }
+
+    public static final UsuarioResponse build(final List<UsuarioDTO> datos) {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(new ArrayList<>());
+        instance.setDatos(datos);
+
+        return instance;
+    }
+
+    public static final UsuarioResponse build() {
+
+    	UsuarioResponse instance = new UsuarioResponse();
+        instance.setMensajes(new ArrayList<>());
+        instance.setDatos(new ArrayList<>());
+
+        return instance;
+    }
+    
+    public List<String> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(List<String> mensajes) {
+        this.mensajes = mensajes;
+    }
+
+    // Getter and setter for datos
+    public List<UsuarioDTO> getDatos() {
+        return datos;
+    }
+
+    public void setDatos(List<UsuarioDTO> datos) {
+        this.datos = datos;
+    }
+}

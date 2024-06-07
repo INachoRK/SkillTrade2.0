@@ -1,6 +1,7 @@
 package co.edu.uco.skilltrade.data.dao.factory.sql.azuresql;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -10,9 +11,11 @@ import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoM
 import co.edu.uco.skilltrade.crosscutting.helpers.SQLHelper;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
 import co.edu.uco.skilltrade.data.dao.SesionDAO;
+import co.edu.uco.skilltrade.data.dao.UsuarioDAO;
 import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.CursoAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.SesionAzureSqlDAO;
+import co.edu.uco.skilltrade.data.dao.sql.azuresql.UsuarioAzureSqlDAO;
 
 public final class AzureSqlDAOFactory extends DAOFactory {
 
@@ -32,12 +35,12 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 			System.out.println(connection);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
 
 			throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, excepcion);
 		} catch (final Exception excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
 
 			throw new DataSkillTradeException(mensajeTecnico, mensajeUsuario, excepcion);
 		}
@@ -75,6 +78,11 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 	@Override
 	public SesionDAO getSesionDAO() {
 		return new SesionAzureSqlDAO(connection);
+	}
+
+	@Override
+	public UsuarioDAO getUsuarioDAO() {
+		return new UsuarioAzureSqlDAO(connection);
 	}
 
 }

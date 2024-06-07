@@ -40,7 +40,7 @@ public final class SesionEntity {
 		return id;
 	}
 
-	public final SesionEntity setId(int id) {
+	private final SesionEntity setId(int id) {
 		this.id = id;
 		return this;
 	}
@@ -49,7 +49,7 @@ public final class SesionEntity {
 		return titulo;
 	}
 
-	public final SesionEntity setTitulo(String titulo) {
+	private final SesionEntity setTitulo(String titulo) {
 		this.titulo = TextHelper.applyTrim(titulo);
 		return this;
 	}
@@ -58,7 +58,7 @@ public final class SesionEntity {
 		return descripcion;
 	}
 
-	public final SesionEntity setDescripcion(String descripcion) {
+	private final SesionEntity setDescripcion(String descripcion) {
 		this.descripcion = TextHelper.applyTrim(descripcion);
 		return this;
 	}
@@ -67,7 +67,7 @@ public final class SesionEntity {
 		return video;
 	}
 
-	public final SesionEntity setVideo(byte[] video) {
+	private final SesionEntity setVideo(byte[] video) {
 		this.video = video;
 		return this;
 	}
@@ -76,7 +76,7 @@ public final class SesionEntity {
 		return curso;
 	}
 
-	public SesionEntity setCurso(CursoEntity curso) {
+	private SesionEntity setCurso(CursoEntity curso) {
 		this.curso = ObjectHelper.getObjectHelper().getDefault(curso, CursoEntity.build());
 		return this;
 	}

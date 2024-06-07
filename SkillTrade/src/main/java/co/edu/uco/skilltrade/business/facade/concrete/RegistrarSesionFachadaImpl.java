@@ -6,6 +6,8 @@ import co.edu.uco.skilltrade.business.facade.RegistrarSesionFachada;
 import co.edu.uco.skilltrade.business.usecase.impl.RegistrarSesionImpl;
 import co.edu.uco.skilltrade.crosscutting.exceptions.SkillTradeException;
 import co.edu.uco.skilltrade.crosscutting.exceptions.custom.BusinessSkillTradeException;
+import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
 import co.edu.uco.skilltrade.data.dao.factory.enums.Factory;
 import co.edu.uco.skilltrade.dto.SesionDTO;
@@ -34,8 +36,8 @@ public class RegistrarSesionFachadaImpl implements RegistrarSesionFachada {
 		}catch (final Exception excepcion) {
 			factory.cancelarTransaccion();
 			
-			var mensajeUsuario = "Se ha presentado un problema tratando de Registrar la información de una nueva ciudad";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase RegistrarCiudadFchadaImpl. Por favor revise la traza completa del problema";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00028);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
 		
 			throw new BusinessSkillTradeException(mensajeTecnico, mensajeUsuario);
 			

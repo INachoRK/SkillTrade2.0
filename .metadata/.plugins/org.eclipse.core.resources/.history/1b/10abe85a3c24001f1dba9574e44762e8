@@ -1,0 +1,8 @@
+package co.edu.uco.skilltrade.api.controller.response.usuario;
+
+public class Snippet {
+	public static void main(String[] args) {
+		usuario
+	}
+}
+
