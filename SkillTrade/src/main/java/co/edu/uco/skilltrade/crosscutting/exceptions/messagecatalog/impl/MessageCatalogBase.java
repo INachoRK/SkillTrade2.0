@@ -89,13 +89,21 @@ public final class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
 				"No ha sido posible consultar la información de los usuarios. Por favor, inténtelo de nuevo o comuníquese con el administrador de SkillTrade."));
 		mensajes.put(CodigoMensaje.M00037.getIdentificador(), new Mensaje(CodigoMensaje.M00037,
-				"Se ha presentado un problema INESPERADO intentando consultar al ususario deseado en la bsae de datos SQL, si el problema persiste póngase en contacto con un administrador de SkillTrade..."));
+				"Se ha presentado un problema INESPERADO intentando consultar al ususario deseado en la bsae de datos SQL, si el problema persiste pÃ³ngase en contacto con un administrador de SkillTrade..."));
 		mensajes.put(CodigoMensaje.M00038.getIdentificador(), new Mensaje(CodigoMensaje.M00038,
-				"No ha sido posible llevar a cabo la eliminacion de la informacion del usuario deseado. Por favor intente de nuevo y en caso de pérsisitir el problema, comuniquese con el administrador de SkillTrade..."));
+				"No ha sido posible llevar a cabo la eliminacion de la informacion del usuario deseado. Por favor intente de nuevo y en caso de pÃ©rsisitir el problema, comuniquese con el administrador de SkillTrade..."));
 		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
-				"Se ha presentado un problema INESPERADO tratando de eliminar la información del usuario seleccionado de la base de datos. Por favor intente de nuevo y si el problema persiste póngase en contacto con un administrador de SkillTrade."));
-		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
-				"No existe el usuario que está buscando, verifique la información y vuelva a intentarlo, en caso de no "));
+				"Se ha presentado un problema al buscar la categoría deseada, por favor inténtelo de nuevo y si el error persiste póngase en contacto con un administrador de SkillTrade."));
+		mensajes.put(CodigoMensaje.M00040.getIdentificador(), new Mensaje(CodigoMensaje.M00040,
+				"Hubo un problema inesperado al buscar la categoría en la base de datos SQL, por favor haga una traza completa del error."));
+		mensajes.put(CodigoMensaje.M00041.getIdentificador(), new Mensaje(CodigoMensaje.M00041,
+				"Se ha presentado un problema intentando mostrar la información de una categoría."));
+		mensajes.put(CodigoMensaje.M00042.getIdentificador(), new Mensaje(CodigoMensaje.M00042,
+				"No se ha podido traer la información de la categoría desde la base de datos SQL, intente de nuevo y si el pronlema persiste póngase en Contacto con un administrador de SkillTrade."));
+		mensajes.put(CodigoMensaje.M00043.getIdentificador(), new Mensaje(CodigoMensaje.M00043,
+				"Se ha presentado un problema tratando de consultar la información del curso deseado."));
+		mensajes.put(CodigoMensaje.M00044.getIdentificador(), new Mensaje(CodigoMensaje.M00044,
+				"Se ha presentado un problema INESPERADO tratando de ejecutar el método de la clase ConsultarCategoriaFachadaImpl. Por favor revise la traza completa del problema."));
 
 	}
 

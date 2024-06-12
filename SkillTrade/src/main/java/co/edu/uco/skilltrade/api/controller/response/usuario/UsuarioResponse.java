@@ -10,12 +10,14 @@ public class UsuarioResponse extends Response<UsuarioDTO> {
 	
 	private List<String> mensajes;
     private List<UsuarioDTO> datos;
+    private boolean accesoAutorizado;
 
-    public static final UsuarioResponse build(final List<String> mensajes, final List<UsuarioDTO> datos) {
+    public static final UsuarioResponse build(final List<String> mensajes, final List<UsuarioDTO> datos, final boolean accesoAutorizado) {
 
     	UsuarioResponse instance = new UsuarioResponse();
         instance.setMensajes(mensajes);
         instance.setDatos(datos);
+        instance.setAccesoAutorizado(accesoAutorizado);
 
         return instance;
     }
@@ -24,7 +26,9 @@ public class UsuarioResponse extends Response<UsuarioDTO> {
 
     	UsuarioResponse instance = new UsuarioResponse();
         instance.setMensajes(new ArrayList<>());
-        instance.setDatos(datos);
+        instance.setDatos(new ArrayList<>());
+        instance.setAccesoAutorizado(false);
+        
 
         return instance;
     }
@@ -46,7 +50,7 @@ public class UsuarioResponse extends Response<UsuarioDTO> {
         this.mensajes = mensajes;
     }
 
-    // Getter and setter for datos
+    
     public List<UsuarioDTO> getDatos() {
         return datos;
     }
@@ -54,4 +58,12 @@ public class UsuarioResponse extends Response<UsuarioDTO> {
     public void setDatos(List<UsuarioDTO> datos) {
         this.datos = datos;
     }
+
+	public boolean isAccesoAutorizado() {
+		return accesoAutorizado;
+	}
+
+	public void setAccesoAutorizado(boolean accesoAutorizado) {
+		this.accesoAutorizado = accesoAutorizado;
+	}
 }

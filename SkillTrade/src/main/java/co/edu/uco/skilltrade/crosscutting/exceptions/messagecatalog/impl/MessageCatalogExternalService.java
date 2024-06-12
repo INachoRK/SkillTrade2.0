@@ -25,7 +25,7 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 	public final String obtenerContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
 		return obtenerMensaje(codigo, parametros).getContenido();
 	}
-
+                                            
 	@Override
 	public final Mensaje obtenerMensaje(CodigoMensaje codigo, final String... parametros) {
 

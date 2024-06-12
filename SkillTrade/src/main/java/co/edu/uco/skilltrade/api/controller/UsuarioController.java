@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uco.skilltrade.api.controller.response.Response;
@@ -18,6 +20,7 @@ import co.edu.uco.skilltrade.dto.UsuarioDTO;
 
 @RestController
 @RequestMapping("skilltrade/api/v1/usuario")
+@CrossOrigin(origins = "http://127.0.0.1:5501")
 public final class UsuarioController {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
@@ -32,20 +35,23 @@ public final class UsuarioController {
 
     @GetMapping
     public ResponseEntity<Response<UsuarioDTO>> consultar(
-    		@RequestBody UsuarioDTO dto) {
+    		@RequestParam String correo, String password) {
         
         UsuarioResponse usuarioResponse = UsuarioResponse.build();
         HttpStatus httpStatusResponse = HttpStatus.OK;
 
         try {
-            final var usuarioDtoFilter = UsuarioDTO.build().setCorreo(dto.getCorreo());
-            final var resultados = fachada.ejecutarLogin(usuarioDtoFilter);
-            if (!resultados) {
+            final var usuarioDtoFilter = UsuarioDTO.build().setCorreo(correo).setPassword(password);
+            final boolean resultadoAcceso = fachada.ejecutarLogin(usuarioDtoFilter);
+            
+            if (!resultadoAcceso) {
                 usuarioResponse.getMensajes().add("Usuario no encontrado o contraseña incorrecta");
+                usuarioResponse.setAccesoAutorizado(false);
                 httpStatusResponse = HttpStatus.UNAUTHORIZED;
             } else {
-                usuarioResponse.setDatos(resultados);
                 usuarioResponse.getMensajes().add("Acceso autorizado");
+                usuarioResponse.setAccesoAutorizado(true);
+                
             }
         } catch (final SkillTradeException exception) {
             logger.error("Error de negocio: ", exception);

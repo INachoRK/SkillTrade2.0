@@ -8,14 +8,14 @@ public class CursoDomain {
 	private String titulo;
 	private String descripcion;
 	private String categoria;
-	private String subcategoria;
 	
-	private CursoDomain(int id, String titulo, String descripcion, String categoria, String subcategoria) {
+	
+	private CursoDomain(int id, String titulo, String descripcion, String categoria) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
 		setCategoria(categoria);
-		setSubcategoria(subcategoria);
+		
 		
 	}
 	
@@ -23,11 +23,11 @@ public class CursoDomain {
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
 		setCategoria(TextHelper.EMPTY);
-		setSubcategoria(TextHelper.EMPTY);
+		
 	}
 	
-	public static final CursoDomain crear (final int id, final String titulo, String descripcion, final String categoria, final String subcategoria) {
-		return new CursoDomain(id, titulo, descripcion, categoria, subcategoria);
+	public static final CursoDomain crear (final int id, final String titulo, String descripcion, final String categoria) {
+		return new CursoDomain(id, titulo, descripcion, categoria);
 	}
 	
 	public static final CursoDomain crear() {
@@ -54,11 +54,6 @@ public class CursoDomain {
 		return this;
 	}
 	
-	private final CursoDomain setSubcategoria(String subcategoria) {
-		this.subcategoria = TextHelper.applyTrim(subcategoria);
-		return this;
-	}
-	
 	public final int getId() {
 		return id;
 	}
@@ -75,8 +70,4 @@ public class CursoDomain {
 		return categoria;
 	}
 
-	public String getSubcategoria() {
-		return subcategoria;
-	}
-	
 }

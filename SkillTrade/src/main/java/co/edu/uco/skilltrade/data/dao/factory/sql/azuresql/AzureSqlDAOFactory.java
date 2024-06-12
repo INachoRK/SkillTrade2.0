@@ -9,10 +9,12 @@ import co.edu.uco.skilltrade.crosscutting.exceptions.custom.DataSkillTradeExcept
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.skilltrade.crosscutting.helpers.SQLHelper;
+import co.edu.uco.skilltrade.data.dao.CategoriaDAO;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
 import co.edu.uco.skilltrade.data.dao.SesionDAO;
 import co.edu.uco.skilltrade.data.dao.UsuarioDAO;
 import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
+import co.edu.uco.skilltrade.data.dao.sql.azuresql.CategoriaAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.CursoAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.SesionAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.UsuarioAzureSqlDAO;
@@ -32,7 +34,6 @@ public final class AzureSqlDAOFactory extends DAOFactory {
         final String contraseña = "Admin123";
 		try {
 			connection = DriverManager.getConnection(connectionUrl, usuario, contraseña);
-			System.out.println(connection);
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
@@ -83,6 +84,11 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 	@Override
 	public UsuarioDAO getUsuarioDAO() {
 		return new UsuarioAzureSqlDAO(connection);
+	}
+
+	@Override
+	public CategoriaDAO getCategoriaDAO() {
+		return new CategoriaAzureSqlDAO(connection);
 	}
 
 }

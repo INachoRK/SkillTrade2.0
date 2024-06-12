@@ -9,26 +9,26 @@ public final class CursoEntity {
 	private String titulo;
 	private String descripcion;
 	private String categoria;
-	private String subcategoria;
+	
 	
 	private CursoEntity(final int id) {
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
 		setCategoria(TextHelper.EMPTY);
-		setSubcategoria(TextHelper.EMPTY);
+		
 	}
 	
 	
-	private CursoEntity(int id, String titulo, String descripcion, String categoria, String subcategoria) {
+	private CursoEntity(int id, String titulo, String descripcion, String categoria) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
 		setCategoria(categoria);
-		setSubcategoria(subcategoria);
+		
 	}
 	
-	public static final CursoEntity build (final int id, final String titulo, String descripcion, final String categoria, final String subcategoria) {
-		return new CursoEntity(id, titulo, descripcion, categoria, subcategoria);
+	public static final CursoEntity build (final int id, final String titulo, String descripcion, final String categoria) {
+		return new CursoEntity(id, titulo, descripcion, categoria);
 	}
 	
 	public static final CursoEntity build() {
@@ -51,11 +51,6 @@ public final class CursoEntity {
 		return categoria;
 	}
 	
-	public String getSubcategoria() {
-		return subcategoria;
-	}
-
-
 	private CursoEntity setId(int id) {
 		this.id = id;
 		return this;
@@ -73,12 +68,6 @@ public final class CursoEntity {
 
 	private CursoEntity setCategoria(String categoria) {
 		this.categoria =  TextHelper.applyTrim(categoria);
-		return this;
-	}
-
-	
-	public CursoEntity setSubcategoria(String subcategoria) {
-		this.subcategoria =  TextHelper.applyTrim(subcategoria);
 		return this;
 	}
 

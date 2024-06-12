@@ -4,6 +4,7 @@ package co.edu.uco.skilltrade.data.dao.factory;
 import co.edu.uco.skilltrade.crosscutting.exceptions.custom.DataSkillTradeException;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+import co.edu.uco.skilltrade.data.dao.CategoriaDAO;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
 import co.edu.uco.skilltrade.data.dao.SesionDAO;
 import co.edu.uco.skilltrade.data.dao.UsuarioDAO;
@@ -46,5 +47,9 @@ public abstract class DAOFactory {
 	public abstract SesionDAO getSesionDAO();
 	
 	public abstract UsuarioDAO getUsuarioDAO();
+	
+	public abstract CategoriaDAO getCategoriaDAO();
+	
+	
 
 }
