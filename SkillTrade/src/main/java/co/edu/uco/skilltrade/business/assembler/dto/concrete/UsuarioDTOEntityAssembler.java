@@ -26,13 +26,13 @@ public class UsuarioDTOEntityAssembler implements DTOEntityAssembler<UsuarioEnti
 	@Override
 	public final UsuarioEntity ensamblarEntity(final UsuarioDTO dto) {
 		var usuarioDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, UsuarioDTO.build());
-		return UsuarioEntity.build(usuarioDtoTmp.getCorreo(), usuarioDtoTmp.getNombreUsuario(), usuarioDtoTmp.getPassword());
+		return UsuarioEntity.build(usuarioDtoTmp.getId(), usuarioDtoTmp.getCorreo(), usuarioDtoTmp.getNombreUsuario(), usuarioDtoTmp.getPassword());
 	}
 
 	@Override
 	public final UsuarioDTO ensamblarDTO(final UsuarioEntity entidad) {
 		var usuarioEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad, UsuarioEntity.build());
-		return UsuarioDTO.build().setCorreo(usuarioEntityTmp.getCorreo()).setNombreUsuario(usuarioEntityTmp.getNombreUsuario()).setPassword(usuarioEntityTmp.getPassword());
+		return UsuarioDTO.build().setId(usuarioEntityTmp.getId()).setCorreo(usuarioEntityTmp.getCorreo()).setNombreUsuario(usuarioEntityTmp.getNombreUsuario()).setPassword(usuarioEntityTmp.getPassword());
 	}
 	
 	@Override

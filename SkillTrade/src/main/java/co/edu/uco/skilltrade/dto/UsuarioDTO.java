@@ -1,33 +1,43 @@
 package co.edu.uco.skilltrade.dto;
 
+import java.util.UUID;
+
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public final class UsuarioDTO {
 	
+	private UUID id;
 	private String correo;
 	private String nombreUsuario;
 	private String password;
 	
 	private UsuarioDTO() {
+		setId(UUIDHelper.DEFAULT_UUID);
 		setCorreo(TextHelper.EMPTY);
 		setNombreUsuario(TextHelper.EMPTY);
 		setPassword(TextHelper.EMPTY);
 	}
 	
 	
-	private UsuarioDTO(String correo, String nombreUsuario, String password) {
+	private UsuarioDTO(UUID id, String correo, String nombreUsuario, String password) {
+		setId(id);
 		setCorreo(correo);
 		setNombreUsuario(nombreUsuario);
 		setPassword(password);
 		
 	}
 	
-	public static final UsuarioDTO build (final String correo, final String nombreUsuario, final String password) {
-		return new UsuarioDTO(correo, nombreUsuario, password);
+	public static final UsuarioDTO build (final UUID id, final String correo, final String nombreUsuario, final String password) {
+		return new UsuarioDTO(id, correo, nombreUsuario, password);
 	}
 	
 	public static final UsuarioDTO build() {
 		return new UsuarioDTO();
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 
 	public String getCorreo() {
@@ -42,8 +52,13 @@ public final class UsuarioDTO {
 		return password;
 	}
 
+	public UsuarioDTO setId(UUID id) {
+		this.id = UUIDHelper.getDefault(id);
+		return this;
+	}
+	
 	public UsuarioDTO setCorreo(String correo) {
-		this.correo = correo;
+		this.correo = TextHelper.applyTrim(correo);
 		return this;
 	}
 
@@ -56,5 +71,10 @@ public final class UsuarioDTO {
 		this.password = TextHelper.applyTrim(password);
 		return this;
 	}
+
+
+	
+
+	
 
 }

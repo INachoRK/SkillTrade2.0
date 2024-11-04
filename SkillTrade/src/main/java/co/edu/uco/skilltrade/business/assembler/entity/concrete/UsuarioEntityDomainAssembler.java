@@ -25,13 +25,13 @@ public class UsuarioEntityDomainAssembler implements EntityDomainAssembler<Usuar
 	@Override
     public final UsuarioDomain ensamblarDominio(final UsuarioEntity entidad) {
         var usuarioEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad, UsuarioEntity.build());
-        return UsuarioDomain.crear(usuarioEntityTmp.getCorreo(), usuarioEntityTmp.getNombreUsuario(), usuarioEntityTmp.getPassword());
+        return UsuarioDomain.crear(usuarioEntityTmp.getId(), usuarioEntityTmp.getCorreo(), usuarioEntityTmp.getNombreUsuario(), usuarioEntityTmp.getPassword());
     }
 
     @Override
     public final UsuarioEntity ensamblarEntidad(final UsuarioDomain dominio) {
         var usuarioDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, UsuarioDomain.build());
-        return UsuarioEntity.build(usuarioDomainTmp.getCorreo(), usuarioDomainTmp.getNombreUsuario(), usuarioDomainTmp.getPassword());
+        return UsuarioEntity.build(usuarioDomainTmp.getId(), usuarioDomainTmp.getCorreo(), usuarioDomainTmp.getNombreUsuario(), usuarioDomainTmp.getPassword());
     }
 
     @Override

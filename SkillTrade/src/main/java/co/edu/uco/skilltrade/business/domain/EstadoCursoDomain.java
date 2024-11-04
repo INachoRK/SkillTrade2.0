@@ -5,28 +5,28 @@ import java.util.UUID;
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
-public final class CategoriaDomain {
+public final class EstadoCursoDomain {
 	
 	private UUID id;
 	private String nombre;
 	
 	
-	private CategoriaDomain(final UUID id) {
+	private EstadoCursoDomain(final UUID id) {
 		setNombre(TextHelper.EMPTY);
 	}
 	
 	
-	private CategoriaDomain(UUID id, String nombre) {
+	private EstadoCursoDomain(UUID id, String nombre) {
 		setId(id);
 		setNombre(nombre);
 	}
 	
-	public static final CategoriaDomain build (final UUID id, final String nombre) {
-		return new CategoriaDomain(id, nombre);
+	public static final EstadoCursoDomain build (final UUID id, final String nombre) {
+		return new EstadoCursoDomain(id, nombre);
 	}
 	
-	public static final CategoriaDomain build() {
-		return new CategoriaDomain(UUIDHelper.DEFAULT_UUID);
+	public static final EstadoCursoDomain build() {
+		return new EstadoCursoDomain(UUIDHelper.DEFAULT_UUID);
 	}
 
 	public UUID getId() {
@@ -37,12 +37,12 @@ public final class CategoriaDomain {
 		return nombre;
 	}
 
-	private CategoriaDomain setId(UUID id) {
+	public EstadoCursoDomain setId(UUID id) {
 		this.id = id;
 		return this;
 	}
 
-	private CategoriaDomain setNombre(String nombre) {
+	public EstadoCursoDomain setNombre(String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}

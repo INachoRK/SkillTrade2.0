@@ -1,26 +1,29 @@
-package co.edu.uco.skilltrade.entity;
+ package co.edu.uco.skilltrade.entity;
+
+import java.util.UUID;
 
 import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 
 public final class SesionEntity {
 	
-	private int id;
+	private UUID id;
 	private String titulo;
 	private String descripcion;
 	private byte[] video;
 	private CursoEntity curso;
 	
-	private SesionEntity(final int id) {
+	private SesionEntity(final UUID id) {
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
-		setVideo(video);
+		setVideo(NumericHelper.BYTE);
 		setCurso(CursoEntity.build());
 	}
 	
-	private SesionEntity(int id, String titulo, String descripcion, byte[] video, CursoEntity curso) {
+	private SesionEntity(UUID id, String titulo, String descripcion, byte[] video, CursoEntity curso) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
@@ -28,19 +31,19 @@ public final class SesionEntity {
 		setCurso(curso);
 	}
 	
-	public static final SesionEntity build (final int id, final String titulo, String descripcion, final byte[] video, final CursoEntity curso) {
+	public static final SesionEntity build (final UUID id, final String titulo, String descripcion, final byte[] video, final CursoEntity curso) {
 		return new SesionEntity(id, titulo, descripcion, video, curso);
 	}
 	
 	public static final SesionEntity build() {
-		return new SesionEntity(NumericHelper.ZERO);
+		return new SesionEntity(UUIDHelper.DEFAULT_UUID);
 	}
 	
-	public final int getId() {
+	public final UUID getId() {
 		return id;
 	}
 
-	private final SesionEntity setId(int id) {
+	private final SesionEntity setId(UUID id) {
 		this.id = id;
 		return this;
 	}

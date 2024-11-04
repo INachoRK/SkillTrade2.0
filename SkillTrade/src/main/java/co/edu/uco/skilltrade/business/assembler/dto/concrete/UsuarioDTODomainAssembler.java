@@ -26,13 +26,13 @@ public class UsuarioDTODomainAssembler implements DTODomainAssembler<UsuarioDoma
 	@Override
 	public final UsuarioDomain ensamblarDominio(final UsuarioDTO dto) {
 		var usuarioDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, UsuarioDTO.build());
-		return UsuarioDomain.crear(usuarioDtoTmp.getCorreo(), usuarioDtoTmp.getNombreUsuario(), usuarioDtoTmp.getPassword());
+		return UsuarioDomain.crear(usuarioDtoTmp.getId(), usuarioDtoTmp.getCorreo(), usuarioDtoTmp.getNombreUsuario(), usuarioDtoTmp.getPassword());
 	}
 
 	@Override
 	public final UsuarioDTO ensamblarDTO(final UsuarioDomain dominio) {
 		var usuarioDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, UsuarioDomain.build());
-		return UsuarioDTO.build().setCorreo(usuarioDomainTmp.getCorreo()).setNombreUsuario(usuarioDomainTmp.getNombreUsuario()).setPassword(usuarioDomainTmp.getPassword());
+		return UsuarioDTO.build().setId(usuarioDomainTmp.getId()).setCorreo(usuarioDomainTmp.getCorreo()).setNombreUsuario(usuarioDomainTmp.getNombreUsuario()).setPassword(usuarioDomainTmp.getPassword());
 	}
 	
 	@Override

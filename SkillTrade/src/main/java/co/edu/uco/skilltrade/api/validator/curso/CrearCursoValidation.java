@@ -24,7 +24,7 @@ public final class CrearCursoValidation implements Validation<CursoDTO>{
 		
 		var result = Result.create();
 
-		if (ObjectHelper.getObjectHelper().isNUll(data)) {
+		if (ObjectHelper.getObjectHelper().isNull(data)) {
 			result.addMessage("La informacion que ha sido suminstrada está vacía");
 		} else {
 

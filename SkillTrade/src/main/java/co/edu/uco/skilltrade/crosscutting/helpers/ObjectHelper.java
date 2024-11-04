@@ -12,12 +12,12 @@ public final class ObjectHelper {
 		return instance;
 	}
 	
-	public final <T> boolean isNUll(T object) {
+	public static final <T> boolean isNull(T object) {
 		return object == null;
 	}
 	
 	public final <T> T getDefault(final T object, final T defaultObject) {
-		return isNUll(object) ? defaultObject : object;
+		return isNull(object) ? defaultObject : object;
 	}
 	
 }

@@ -11,11 +11,13 @@ import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoM
 import co.edu.uco.skilltrade.crosscutting.helpers.SQLHelper;
 import co.edu.uco.skilltrade.data.dao.CategoriaDAO;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
+import co.edu.uco.skilltrade.data.dao.EstadoCursoDAO;
 import co.edu.uco.skilltrade.data.dao.SesionDAO;
 import co.edu.uco.skilltrade.data.dao.UsuarioDAO;
 import co.edu.uco.skilltrade.data.dao.factory.DAOFactory;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.CategoriaAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.CursoAzureSqlDAO;
+import co.edu.uco.skilltrade.data.dao.sql.azuresql.EstadoCursoAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.SesionAzureSqlDAO;
 import co.edu.uco.skilltrade.data.dao.sql.azuresql.UsuarioAzureSqlDAO;
 
@@ -29,9 +31,9 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 
 	@Override
 	protected void obtenerConexion() {
-		final String connectionUrl = "jdbc:sqlserver://skilltrade-server.database.windows.net:1433;databaseName=STDB";
-		final String usuario = "Administrador";
-        final String contraseña = "Admin123";
+		final String connectionUrl = "jdbc:postgresql://localhost:5432/skilltrade";
+		final String usuario = "postgres";
+        final String contraseña = "admin123";
 		try {
 			connection = DriverManager.getConnection(connectionUrl, usuario, contraseña);
 		} catch (final SQLException excepcion) {
@@ -89,6 +91,11 @@ public final class AzureSqlDAOFactory extends DAOFactory {
 	@Override
 	public CategoriaDAO getCategoriaDAO() {
 		return new CategoriaAzureSqlDAO(connection);
+	}
+
+	@Override
+	public EstadoCursoDAO getEstadoCursoDAO() {
+		return new EstadoCursoAzureSqlDAO(connection);
 	}
 
 }

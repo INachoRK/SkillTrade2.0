@@ -35,13 +35,13 @@ public final class UsuarioController {
 
     @GetMapping
     public ResponseEntity<Response<UsuarioDTO>> consultar(
-    		@RequestParam String correo, String password) {
+    		@RequestBody UsuarioDTO dto) {
         
         UsuarioResponse usuarioResponse = UsuarioResponse.build();
         HttpStatus httpStatusResponse = HttpStatus.OK;
 
         try {
-            final var usuarioDtoFilter = UsuarioDTO.build().setCorreo(correo).setPassword(password);
+            final var usuarioDtoFilter = UsuarioDTO.build().setCorreo(dto.getCorreo()).setPassword(dto.getPassword());
             final boolean resultadoAcceso = fachada.ejecutarLogin(usuarioDtoFilter);
             
             if (!resultadoAcceso) {

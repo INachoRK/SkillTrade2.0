@@ -1,30 +1,39 @@
 package co.edu.uco.skilltrade.dto;
 
 
-import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
+import java.util.UUID;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public final class CursoDTO {
 	
-	private int id;
+	private UUID id;
 	private String titulo;
 	private String descripcion;
-	private String categoria;
+	private CategoriaDTO categoria;
+	private UsuarioDTO usuario;
+	private EstadoCursoDTO estado;
 	
 	
 	public CursoDTO() {
-		setId(NumericHelper.ZERO);
+		setId(UUIDHelper.DEFAULT_UUID);
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
-		setCategoria(TextHelper.EMPTY);
+		setCategoria(CategoriaDTO.build());
+		setUsuario(UsuarioDTO.build());
+		setEstado(EstadoCursoDTO.build());
 		
 	}
 	
-	public CursoDTO(int id, String titulo, String descripcion, String categoria) {
+	public CursoDTO(UUID id, String titulo, String descripcion, CategoriaDTO categoria, UsuarioDTO usuario, EstadoCursoDTO estado) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
 		setCategoria(categoria);
+		setUsuario(usuario);
+		setEstado(estado);
 		
 	}
 	
@@ -32,7 +41,7 @@ public final class CursoDTO {
 		return new CursoDTO();
 	}
 	
-	public final CursoDTO setId(final int id) {
+	public final CursoDTO setId(final UUID id) {
 		this.id = id;
 		return this;
 	}
@@ -47,12 +56,22 @@ public final class CursoDTO {
 		return this;
 	}
 	
-	public final CursoDTO setCategoria(String categoria) {
-		this.categoria = TextHelper.applyTrim(categoria);
+	public final CursoDTO setCategoria(CategoriaDTO categoria) {
+		this.categoria = ObjectHelper.getObjectHelper().getDefault(categoria, CategoriaDTO.build());
 		return this;
 	}
 	
-	public final int getId() {
+	public final CursoDTO setUsuario(UsuarioDTO usuario) {
+		this.usuario = ObjectHelper.getObjectHelper().getDefault(usuario, UsuarioDTO.build());
+		return this;
+	}
+
+	public final CursoDTO setEstado(EstadoCursoDTO estado) {
+		this.estado = ObjectHelper.getObjectHelper().getDefault(estado, EstadoCursoDTO.build());
+		return this;
+	}
+	
+	public final UUID getId() {
 		return id;
 	}
 	
@@ -64,9 +83,21 @@ public final class CursoDTO {
 		return descripcion;
 	}
 	
-	public final String getCategoria() {
+	public final CategoriaDTO getCategoria() {
 		return categoria;
 	}
+
+	public UsuarioDTO getUsuario() {
+		return usuario;
+	}
+
+	public EstadoCursoDTO getEstado() {
+		return estado;
+	}
+
+	
+	
+	
 
 }
 

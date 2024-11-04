@@ -116,7 +116,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 	@Override
 	public final Mensaje obtenerMensaje(final CodigoMensaje codigo, final String... parametros) {
 
-		if (ObjectHelper.getObjectHelper().isNUll(codigo)) {
+		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00001);
 			throw new CrosscuttingSkillTradeException(mensajeTecnico, mensajeUsuario);

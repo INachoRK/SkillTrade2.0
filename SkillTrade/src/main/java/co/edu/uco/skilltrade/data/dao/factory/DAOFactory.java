@@ -6,6 +6,7 @@ import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatal
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.skilltrade.data.dao.CategoriaDAO;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
+import co.edu.uco.skilltrade.data.dao.EstadoCursoDAO;
 import co.edu.uco.skilltrade.data.dao.SesionDAO;
 import co.edu.uco.skilltrade.data.dao.UsuarioDAO;
 import co.edu.uco.skilltrade.data.dao.factory.sql.azuresql.AzureSqlDAOFactory;
@@ -50,6 +51,6 @@ public abstract class DAOFactory {
 	
 	public abstract CategoriaDAO getCategoriaDAO();
 	
+	public abstract EstadoCursoDAO getEstadoCursoDAO();
 	
-
 }

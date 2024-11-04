@@ -26,7 +26,7 @@ public final class ConsultarUsuarioValidation implements Validation<UsuarioDTO>{
 		
 		var result = Result.create();
 
-		if (ObjectHelper.getObjectHelper().isNUll(data)) {
+		if (ObjectHelper.getObjectHelper().isNull(data)) {
 			result.addMessage("La informacion que ha sido suminstrada está vacía");
 		} else {
 

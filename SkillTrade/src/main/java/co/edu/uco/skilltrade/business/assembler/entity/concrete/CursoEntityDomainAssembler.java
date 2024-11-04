@@ -24,13 +24,15 @@ public class CursoEntityDomainAssembler implements EntityDomainAssembler<CursoDo
 	@Override
     public final CursoDomain ensamblarDominio(final CursoEntity entidad) {
         var cursoEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad,CursoEntity.build());
-        return CursoDomain.crear(cursoEntityTmp.getId(), cursoEntityTmp.getTitulo(), cursoEntityTmp.getDescripcion(), cursoEntityTmp.getCategoria());
+        return CursoDomain.crear(cursoEntityTmp.getId(), cursoEntityTmp.getTitulo(), cursoEntityTmp.getDescripcion(), CategoriaEntityDomainAssembler.obtenerInstancia().ensamblarDominio(cursoEntityTmp.getCategoria()),
+        		UsuarioEntityDomainAssembler.obtenerInstancia().ensamblarDominio(cursoEntityTmp.getUsuario()), EstadoCursoEntityDomainAssembler.obtenerInstancia().ensamblarDominio(cursoEntityTmp.getEstado()));
     }
 
     @Override
     public final CursoEntity ensamblarEntidad(final CursoDomain dominio) {
         var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear());
-        return CursoEntity.build(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), cursoDomainTmp.getCategoria());
+        return CursoEntity.build(cursoDomainTmp.getId(), cursoDomainTmp.getTitulo(), cursoDomainTmp.getDescripcion(), CategoriaEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(cursoDomainTmp.getCategoria()),
+        		UsuarioEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(cursoDomainTmp.getUsuario()), EstadoCursoEntityDomainAssembler.obtenerInstancia().ensamblarEntidad(cursoDomainTmp.getEstado()));
     }
 
     @Override

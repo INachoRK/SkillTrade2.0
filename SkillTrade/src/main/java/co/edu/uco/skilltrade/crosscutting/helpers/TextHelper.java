@@ -4,6 +4,7 @@ import static co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper.getObjectH
 
 public final class TextHelper {
 
+	private static final TextHelper INSTANCE = new TextHelper();
 	public static final String EMPTY = "";
 	public static final String UNDERLINE = "_";
 	public static final String EMAIL_RE = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -12,9 +13,14 @@ public final class TextHelper {
 	private TextHelper() {
 		super();
 	}
+	
+	public static final TextHelper getTextHelper() {
+		return INSTANCE;
+	}
 
 	public static final boolean isNull(final String string) {
-		return getObjectHelper().isNUll(string);
+		ObjectHelper.getObjectHelper();
+		return ObjectHelper.isNull(string);
 	}
 
 	public static final boolean isNullOrEmpty(final String string) {
@@ -36,7 +42,8 @@ public final class TextHelper {
 	public static final String concatenate(final String... strings) {
 		final var sb = new StringBuilder(EMPTY);
 
-		if (!ObjectHelper.getObjectHelper().isNUll(strings)) {
+		ObjectHelper.getObjectHelper();
+		if (!ObjectHelper.isNull(strings)) {
 			for (final var string : strings) {
 				sb.append(applyTrim(string));
 			}
@@ -45,16 +52,17 @@ public final class TextHelper {
 		return sb.toString();
 	}
 	
-	public final static boolean matchPattern(final String text, final String pattern) {
+	public final boolean matchPattern(final String text, final String pattern) {
 		return getDefault(text).matches(getDefault(pattern));
 	}
 
 	public static final boolean emailStringIsValid(final String emailValue) {
-		return (TextHelper.matchPattern(emailValue, EMAIL_RE));
+		return (TextHelper.getTextHelper().matchPattern(emailValue, EMAIL_RE));
 	}
 	
 	public static boolean isPasswordValid(final String password) {
-        return TextHelper.matchPattern(password, PASSWORD_PATTERN);
+        return TextHelper.getTextHelper().matchPattern(password, PASSWORD_PATTERN);
     }
+
 
 }

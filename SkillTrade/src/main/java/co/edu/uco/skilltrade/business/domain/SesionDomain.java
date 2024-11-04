@@ -1,23 +1,29 @@
 package co.edu.uco.skilltrade.business.domain;
 
+import java.util.UUID;
+
+import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public class SesionDomain {
 	
-	private int id;
+	private UUID id;
 	private String titulo;
 	private String descripcion;
 	private byte[] video;
 	private CursoDomain curso;
 	
 	private SesionDomain() {
+		setId(UUIDHelper.DEFAULT_UUID);
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
-		setVideo(video);
+		setVideo(NumericHelper.BYTE);
+		setCurso(CursoDomain.crear());
 	}
 	
-	private SesionDomain(int id, String titulo, String descripcion, byte[] video, CursoDomain curso) {
+	private SesionDomain(UUID id, String titulo, String descripcion, byte[] video, CursoDomain curso) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
@@ -25,7 +31,7 @@ public class SesionDomain {
 		setCurso(CursoDomain.crear());
 	}
 	
-	public static final SesionDomain crear (final int id, final String titulo, String descripcion, byte[] video, CursoDomain curso) {
+	public static final SesionDomain crear (final UUID id, final String titulo, String descripcion, byte[] video, CursoDomain curso) {
 		return new SesionDomain(id, titulo, descripcion, video, curso);
 	}
 	
@@ -33,11 +39,11 @@ public class SesionDomain {
 		return new SesionDomain();
 	}
 	
-	public final int getId() {
+	public final UUID getId() {
 		return id;
 	}
 
-	private final SesionDomain setId(int id) {
+	private final SesionDomain setId(UUID id) {
 		this.id = id;
 		return this;
 	}

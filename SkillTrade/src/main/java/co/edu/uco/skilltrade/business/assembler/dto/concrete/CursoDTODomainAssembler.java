@@ -25,14 +25,16 @@ public class CursoDTODomainAssembler implements DTODomainAssembler<CursoDomain, 
 	@Override
 	public final CursoDomain ensamblarDominio(final CursoDTO dto) {
 		var cursoDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, new CursoDTO());
-		return CursoDomain.crear(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), cursoDtoTmp.getCategoria());
+		return CursoDomain.crear(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), CategoriaDTODomainAssembler.obtenerInstancia().ensamblarDominio(cursoDtoTmp.getCategoria())
+				, UsuarioDTODomainAssembler.obtenerInstancia().ensamblarDominio(cursoDtoTmp.getUsuario()), EstadoCursoDTODomainAssembler.obtenerInstancia().ensamblarDominio(cursoDtoTmp.getEstado()));
 	}
 
 	@Override
 	public final CursoDTO ensamblarDTO(final CursoDomain dominio) {
 		var cursoDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, CursoDomain.crear());
 		return CursoDTO.build().setId(cursoDomainTmp.getId()).setTitulo(cursoDomainTmp.getTitulo()).
-				setDescripcion(cursoDomainTmp.getDescripcion()).setCategoria(cursoDomainTmp.getCategoria());
+				setDescripcion(cursoDomainTmp.getDescripcion()).setCategoria(CategoriaDTODomainAssembler.obtenerInstancia().ensamblarDTO(cursoDomainTmp.getCategoria()))
+				.setUsuario(UsuarioDTODomainAssembler.obtenerInstancia().ensamblarDTO(cursoDomainTmp.getUsuario())).setEstado(EstadoCursoDTODomainAssembler.obtenerInstancia().ensamblarDTO(cursoDomainTmp.getEstado()));
 	}
 	
 	@Override

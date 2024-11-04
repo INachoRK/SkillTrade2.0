@@ -13,8 +13,10 @@ import co.edu.uco.skilltrade.business.assembler.dto.concrete.CursoDTOEntityAssem
 import co.edu.uco.skilltrade.crosscutting.exceptions.custom.DataSkillTradeException;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 import co.edu.uco.skilltrade.data.dao.CursoDAO;
 import co.edu.uco.skilltrade.data.dao.sql.SqlConnection;
+import co.edu.uco.skilltrade.dto.CategoriaDTO;
 import co.edu.uco.skilltrade.dto.CursoDTO;
 import co.edu.uco.skilltrade.entity.CursoEntity;
 
@@ -28,14 +30,17 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 	public final void crear(final CursoEntity entidad) {
 		final var sentenciaSql = new StringBuilder();
 		
-		sentenciaSql.append("INSERT INTO dbo.Curso ");
-		sentenciaSql.append("(titulo, descripcion, categoria) ");
-		sentenciaSql.append("VALUES (?, ?, ?)");
+		sentenciaSql.append("INSERT INTO skilltrade.curso ");
+		sentenciaSql.append("(id, titulo, descripcion, categoria, usuario, estado)");
+		sentenciaSql.append("VALUES (?, ?, ?, ?, ?, ?)");
 				
         try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())){
-        	sentenciaPreparada.setString(1, entidad.getTitulo());
-            sentenciaPreparada.setString(2, entidad.getDescripcion());
-            sentenciaPreparada.setString(3, entidad.getCategoria());
+        	sentenciaPreparada.setObject(1, entidad.getId());
+        	sentenciaPreparada.setString(2, entidad.getTitulo());
+            sentenciaPreparada.setString(3, entidad.getDescripcion());
+            sentenciaPreparada.setObject(4, entidad.getCategoria().getId());
+            sentenciaPreparada.setObject(5, entidad.getUsuario().getId());
+            sentenciaPreparada.setObject(6, entidad.getEstado().getId());
             
             
             sentenciaPreparada.executeUpdate();
@@ -93,7 +98,7 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 		final List<CursoEntity> listaCursos = new ArrayList<>();
 		final var sentenciaSql = new StringBuilder();
 		
-		sentenciaSql.append("SELECT titulo, descripcion, categoria ");
+		sentenciaSql.append("SELECT id, titulo, descripcion, categoria ");
 		sentenciaSql.append("FROM dbo.Curso");
 		
 		try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {  
@@ -101,8 +106,8 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
             	
                 while (resultado.next()) {
                 	CursoDTO cursoTemp = CursoDTO.build();
-                	cursoTemp.setTitulo(resultado.getString("titulo")).setDescripcion(resultado.getString("descripcion"))
-                	.setCategoria(resultado.getString("categoria"));
+                	cursoTemp.setId(UUIDHelper.generateUUIDFromString(resultado.getString("id"))).setTitulo(resultado.getString("titulo")).setDescripcion(resultado.getString("descripcion"))
+                	.setCategoria(CategoriaDTO.build().setNombre(resultado.getString("categoria")));
                 	CursoEntity curso = CursoDTOEntityAssembler.obtenerInstancia().ensamblarEntity(cursoTemp);
 					listaCursos.add(curso); 
                 }

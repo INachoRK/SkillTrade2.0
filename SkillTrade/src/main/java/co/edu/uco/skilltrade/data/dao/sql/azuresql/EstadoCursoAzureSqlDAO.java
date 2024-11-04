@@ -8,40 +8,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.uco.skilltrade.business.assembler.dto.concrete.CategoriaDTOEntityAssembler;
+import co.edu.uco.skilltrade.business.assembler.dto.concrete.EstadoCursoDTOEntityAssembler;
 import co.edu.uco.skilltrade.crosscutting.exceptions.custom.DataSkillTradeException;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
 import co.edu.uco.skilltrade.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
-import co.edu.uco.skilltrade.data.dao.CategoriaDAO;
+import co.edu.uco.skilltrade.data.dao.EstadoCursoDAO;
 import co.edu.uco.skilltrade.data.dao.sql.SqlConnection;
-import co.edu.uco.skilltrade.dto.CategoriaDTO;
-import co.edu.uco.skilltrade.entity.CategoriaEntity;
+import co.edu.uco.skilltrade.dto.EstadoCursoDTO;
+import co.edu.uco.skilltrade.entity.EstadoCursoEntity;
 
-public final class CategoriaAzureSqlDAO extends SqlConnection implements CategoriaDAO {
+public final class EstadoCursoAzureSqlDAO extends SqlConnection implements EstadoCursoDAO {
 
-	public CategoriaAzureSqlDAO(final Connection connection) {
+	public EstadoCursoAzureSqlDAO(final Connection connection) {
 		super(connection);
 	}
 
 	@Override
-	public final List<CategoriaEntity> consultar(CategoriaEntity entidad) {
+	public final List<EstadoCursoEntity> consultar(EstadoCursoEntity entidad) {
 
-		final List<CategoriaEntity> listaCategorias = new ArrayList<>();
+		final List<EstadoCursoEntity> listaCategorias = new ArrayList<>();
         final StringBuilder sentenciaSql = new StringBuilder();
         
 
         sentenciaSql.append("SELECT nombre ");
-        sentenciaSql.append("FROM skilltrade.categoria ");
+        sentenciaSql.append("FROM EstadoCurso ");
         
        
         try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {  
             try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
             	
                 while (resultado.next()) {
-                	CategoriaDTO categoriaTemp = CategoriaDTO.build();
-                	categoriaTemp.setNombre(resultado.getString("nombre"));
-					CategoriaEntity categoria = CategoriaDTOEntityAssembler.obtenerInstancia().ensamblarEntity(categoriaTemp);
-					listaCategorias.add(categoria); 
+                	EstadoCursoDTO estadoCursoTemp = EstadoCursoDTO.build();
+                	estadoCursoTemp.setNombre(resultado.getString("nombre"));
+                	EstadoCursoEntity estadoCurso = EstadoCursoDTOEntityAssembler.obtenerInstancia().ensamblarEntity(estadoCursoTemp);
+					listaCategorias.add(estadoCurso); 
                 }
             }
         } catch (SQLException exception) {
@@ -61,20 +61,10 @@ public final class CategoriaAzureSqlDAO extends SqlConnection implements Categor
 
 
 	@Override
-	public void crear(CategoriaEntity entidad) {
+	public void crear(EstadoCursoEntity entidad) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-	@Override
-	public void actualizar(CategoriaEntity entidad) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 
 	@Override
 	public void eliminar(int id) {
@@ -82,10 +72,14 @@ public final class CategoriaAzureSqlDAO extends SqlConnection implements Categor
 		
 	}
 
-
+	@Override
+	public void actualizar(EstadoCursoEntity entidad) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public boolean consultarLogin(CategoriaEntity entidad) {
+	public boolean consultarLogin(EstadoCursoEntity entidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}

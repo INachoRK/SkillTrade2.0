@@ -1,42 +1,44 @@
 package co.edu.uco.skilltrade.business.domain;
 
+import java.util.UUID;
+
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public final class UsuarioDomain {
 	
+	private UUID id;
 	private String correo;
 	private String nombreUsuario;
 	private String password;
 	
 	private UsuarioDomain() {
+		setId(UUIDHelper.DEFAULT_UUID);
 		setCorreo(TextHelper.EMPTY);
 		setNombreUsuario(TextHelper.EMPTY);
 		setPassword(TextHelper.EMPTY);
 	}
 	
 	
-	private UsuarioDomain(String correo, String nombreUsuario, String password) {
+	private UsuarioDomain(UUID id, String correo, String nombreUsuario, String password) {
+		setId(id);
 		setCorreo(correo);
 		setNombreUsuario(nombreUsuario);
 		setPassword(password);
 		
 	}
 	
-	private UsuarioDomain(String correo, String nombreUsuario) {
-		setCorreo(correo);
-		setNombreUsuario(nombreUsuario);
+	public static final UsuarioDomain crear (final UUID id, final String correo, final String nombreUsuario, final String password) {
+		return new UsuarioDomain(id, correo, nombreUsuario, password);
 	}
 	
-	public static final UsuarioDomain crear (final String correo, final String nombreUsuario, final String password) {
-		return new UsuarioDomain(correo, nombreUsuario, password);
-	}
-	
-	public static final UsuarioDomain build (final String correo, final String nombreUsuario) {
-		return new UsuarioDomain(correo, nombreUsuario);
-	}
-	
+
 	public static final UsuarioDomain build() {
 		return new UsuarioDomain();
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 
 	public String getCorreo() {
@@ -50,9 +52,14 @@ public final class UsuarioDomain {
 	public String getPassword() {
 		return password;
 	}
+	
+	public UsuarioDomain setId(UUID id) {
+		this.id = UUIDHelper.getDefault(id);
+		return this;
+	}
 
 	private UsuarioDomain setCorreo(String correo) {
-		this.correo = correo;
+		this.correo = TextHelper.applyTrim(correo);
 		return this;
 	}
 

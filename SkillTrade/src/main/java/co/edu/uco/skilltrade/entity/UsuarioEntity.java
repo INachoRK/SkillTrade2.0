@@ -1,42 +1,42 @@
 package co.edu.uco.skilltrade.entity;
 
+import java.util.UUID;
+
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public final class UsuarioEntity {
 	
+	private UUID id;
 	private String correo;
 	private String nombreUsuario;
 	private String password;
 	
 	private UsuarioEntity() {
+		setId(UUIDHelper.DEFAULT_UUID);
 		setCorreo(TextHelper.EMPTY);
 		setNombreUsuario(TextHelper.EMPTY);
 		setPassword(TextHelper.EMPTY);
 	}
 	
-	
-	private UsuarioEntity(String correo, String nombreUsuario, String password) {
+	private UsuarioEntity(UUID id, String correo, String nombreUsuario, String password) {
+		setId(id);
 		setCorreo(correo);
 		setNombreUsuario(nombreUsuario);
 		setPassword(password);
 		
 	}
 	
-	private UsuarioEntity(String correo, String nombreUsuario) {
-		setCorreo(correo);
-		setNombreUsuario(nombreUsuario);
-	}
-	
-	public static final UsuarioEntity build (final String correo, final String nombreUsuario, final String password) {
-		return new UsuarioEntity(correo, nombreUsuario, password);
-	}
-	
-	public static final UsuarioEntity build (final String correo, final String nombreUsuario) {
-		return new UsuarioEntity(correo, nombreUsuario);
+	public static final UsuarioEntity build (final UUID id, final String correo, final String nombreUsuario, final String password) {
+		return new UsuarioEntity(id, correo, nombreUsuario, password);
 	}
 	
 	public static final UsuarioEntity build() {
 		return new UsuarioEntity();
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 
 	public String getCorreo() {
@@ -49,6 +49,11 @@ public final class UsuarioEntity {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public UsuarioEntity setId(UUID id) {
+		this.id = UUIDHelper.getDefault(id);
+		return this;
 	}
 
 	private UsuarioEntity setCorreo(String correo) {
@@ -65,5 +70,11 @@ public final class UsuarioEntity {
 		this.password = TextHelper.applyTrim(password);
 		return this;
 	}
+
+
+	
+
+
+	
 
 }

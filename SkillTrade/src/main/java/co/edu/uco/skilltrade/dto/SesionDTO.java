@@ -1,25 +1,28 @@
-package co.edu.uco.skilltrade.dto;
+	package co.edu.uco.skilltrade.dto;
+
+import java.util.UUID;
 
 import co.edu.uco.skilltrade.crosscutting.helpers.NumericHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
+import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
 public final class SesionDTO {
 	
-	private int id;
+	private UUID id;
 	private String titulo;
 	private String descripcion;
 	private byte[] video;
 	private CursoDTO curso;	
 	
-	private SesionDTO(final int id) {
+	private SesionDTO(final UUID id) {
 		setTitulo(TextHelper.EMPTY);
 		setDescripcion(TextHelper.EMPTY);
-		setVideo(video);
+		setVideo(NumericHelper.BYTE);
 		setCurso(CursoDTO.build());
 	}
 	
-	private SesionDTO(int id, String titulo, String descripcion, byte[] video, CursoDTO curso) {
+	private SesionDTO(UUID id, String titulo, String descripcion, byte[] video, CursoDTO curso) {
 		setId(id);
 		setTitulo(titulo);
 		setDescripcion(descripcion);
@@ -27,18 +30,18 @@ public final class SesionDTO {
 		setCurso(CursoDTO.build());
 	}
 	
-	public static final SesionDTO build (final int id, final String titulo, String descripcion, final byte[] video, final CursoDTO curso) {
+	public static final SesionDTO build (final UUID id, final String titulo, String descripcion, final byte[] video, final CursoDTO curso) {
 		return new SesionDTO(id, titulo, descripcion, video, curso);
 	}
 	
 	public static final SesionDTO build() {
-		return new SesionDTO(NumericHelper.ZERO);
+		return new SesionDTO(UUIDHelper.DEFAULT_UUID);
 	}
 	
-	public final int getId() {
+	public final UUID getId() {
 		return id;
 	}
-	public final SesionDTO setId(int id) {
+	public final SesionDTO setId(UUID id) {
 		this.id = id;
 		return this;
 	}

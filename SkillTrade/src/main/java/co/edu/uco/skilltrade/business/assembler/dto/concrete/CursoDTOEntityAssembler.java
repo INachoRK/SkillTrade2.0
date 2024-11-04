@@ -27,14 +27,16 @@ public class CursoDTOEntityAssembler implements DTOEntityAssembler<CursoEntity, 
 	@Override
 	public final CursoEntity ensamblarEntity(final CursoDTO dto) {
 		var cursoDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, CursoDTO.build());
-		return CursoEntity.build(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), cursoDtoTmp.getCategoria());
+		return CursoEntity.build(cursoDtoTmp.getId(), cursoDtoTmp.getTitulo(), cursoDtoTmp.getDescripcion(), CategoriaDTOEntityAssembler.obtenerInstancia().ensamblarEntity(cursoDtoTmp.getCategoria()),
+				UsuarioDTOEntityAssembler.obtenerInstancia().ensamblarEntity(cursoDtoTmp.getUsuario()), EstadoCursoDTOEntityAssembler.obtenerInstancia().ensamblarEntity(cursoDtoTmp.getEstado()));
 	}
 
 	@Override
 	public final CursoDTO ensamblarDTO(final CursoEntity entidad) {
 		var cursoEntityTmp = ObjectHelper.getObjectHelper().getDefault(entidad, CursoEntity.build());
 		return CursoDTO.build().setTitulo(cursoEntityTmp.getTitulo()).setDescripcion(cursoEntityTmp.getDescripcion())
-				.setCategoria(cursoEntityTmp.getCategoria());
+				.setCategoria(CategoriaDTOEntityAssembler.obtenerInstancia().ensamblarDTO(cursoEntityTmp.getCategoria())).setUsuario(UsuarioDTOEntityAssembler.obtenerInstancia().ensamblarDTO(cursoEntityTmp.getUsuario()))
+				.setEstado(EstadoCursoDTOEntityAssembler.obtenerInstancia().ensamblarDTO(cursoEntityTmp.getEstado()));
 	}
 	
 	@Override

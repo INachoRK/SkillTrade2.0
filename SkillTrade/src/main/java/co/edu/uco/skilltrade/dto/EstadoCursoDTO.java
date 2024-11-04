@@ -1,33 +1,32 @@
 package co.edu.uco.skilltrade.dto;
 
-
 import java.util.UUID;
 
 import co.edu.uco.skilltrade.crosscutting.helpers.TextHelper;
 import co.edu.uco.skilltrade.crosscutting.helpers.UUIDHelper;
 
-public final class CategoriaDTO {
+public final class EstadoCursoDTO {
 	
 	private UUID id;
 	private String nombre;
 	
 	
-	private CategoriaDTO(final UUID id) {
+	private EstadoCursoDTO(final UUID id) {
 		setNombre(TextHelper.EMPTY);
 	}
 	
 	
-	private CategoriaDTO(UUID id, String nombre) {
+	private EstadoCursoDTO(UUID id, String nombre) {
 		setId(id);
 		setNombre(nombre);
 	}
 	
-	public static final CategoriaDTO build (final UUID id, final String nombre) {
-		return new CategoriaDTO(id, nombre);
+	public static final EstadoCursoDTO build (final UUID id, final String nombre) {
+		return new EstadoCursoDTO(id, nombre);
 	}
 	
-	public static final CategoriaDTO build() {
-		return new CategoriaDTO(UUIDHelper.DEFAULT_UUID);
+	public static final EstadoCursoDTO build() {
+		return new EstadoCursoDTO(UUIDHelper.DEFAULT_UUID);
 	}
 
 	public UUID getId() {
@@ -38,16 +37,15 @@ public final class CategoriaDTO {
 		return nombre;
 	}
 
-	public CategoriaDTO setId(UUID id) {
+	public EstadoCursoDTO setId(UUID id) {
 		this.id = id;
 		return this;
 	}
 
-	public CategoriaDTO setNombre(String nombre) {
+	public EstadoCursoDTO setNombre(String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
 
 	
 }
-

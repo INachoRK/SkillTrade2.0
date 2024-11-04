@@ -77,9 +77,9 @@ public final class UsuarioAzureSqlDAO extends SqlConnection implements UsuarioDA
         final StringBuilder sentenciaSql = new StringBuilder();
         
 
-        sentenciaSql.append("SELECT correoUsuario, nombreUsuario, contrasena ");
-        sentenciaSql.append("FROM dbo.Usuario ");
-        sentenciaSql.append("WHERE correoUsuario = ?");
+        sentenciaSql.append("SELECT correoUsuario, nombreUsuario, contraseña ");
+        sentenciaSql.append("FROM usuario ");
+        sentenciaSql.append("WHERE correo = ?");
         
 
         try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {  
@@ -91,7 +91,7 @@ public final class UsuarioAzureSqlDAO extends SqlConnection implements UsuarioDA
             	
                 if (resultado.next()) {
                 	UsuarioDTO usuarioTemp = UsuarioDTO.build();
-                	usuarioTemp.setCorreo(resultado.getString("correoUsuario")).setNombreUsuario(resultado.getString("nombreUsuario")).setPassword(resultado.getString("contrasena"));
+                	usuarioTemp.setCorreo(resultado.getString("correo")).setNombreUsuario(resultado.getString("nombreUsuario")).setPassword(resultado.getString("contrasena"));
                 	UsuarioEntity usuario = UsuarioDTOEntityAssembler.obtenerInstancia().ensamblarEntity(usuarioTemp); 
                 	listaUsuarios.add(usuario);
                 }
@@ -120,9 +120,9 @@ public final class UsuarioAzureSqlDAO extends SqlConnection implements UsuarioDA
 		final StringBuilder sentenciaSql = new StringBuilder();
         
 
-        sentenciaSql.append("SELECT correoUsuario, nombreUsuario, contrasena ");
-        sentenciaSql.append("FROM dbo.Usuario ");
-        sentenciaSql.append("WHERE correoUsuario = ? AND contrasena = ?");
+        sentenciaSql.append("SELECT correo, contraseña ");
+        sentenciaSql.append("FROM skilltrade.usuario ");
+        sentenciaSql.append("WHERE correo = ? AND contraseña = ?");
         
 
         try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {  
