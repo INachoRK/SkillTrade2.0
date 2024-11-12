@@ -27,7 +27,7 @@ public final class CategoriaDTO {
 	}
 	
 	public static final CategoriaDTO build() {
-		return new CategoriaDTO(UUIDHelper.DEFAULT_UUID);
+		return new CategoriaDTO(UUIDHelper.DEFAULT_UUID, TextHelper.EMPTY);
 	}
 
 	public UUID getId() {

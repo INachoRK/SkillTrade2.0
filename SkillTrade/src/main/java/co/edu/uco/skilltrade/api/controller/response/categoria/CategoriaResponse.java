@@ -11,6 +11,7 @@ public class CategoriaResponse extends Response<CategoriaDTO> {
 	
 	private List<String> mensajes;
     private List<CategoriaDTO> datos;
+
     
 
     public static final CategoriaResponse build(final List<String> mensajes, final List<CategoriaDTO> datos) {
@@ -57,5 +58,6 @@ public class CategoriaResponse extends Response<CategoriaDTO> {
     public void setDatos(List<CategoriaDTO> datos) {
         this.datos = datos;
     }
-
+    
+   
 }

@@ -19,6 +19,7 @@ public final class CrearCursoValidation implements Validation<CursoDTO>{
 		return new CrearCursoValidation().execute(data);
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public Result execute(CursoDTO data) {
 		

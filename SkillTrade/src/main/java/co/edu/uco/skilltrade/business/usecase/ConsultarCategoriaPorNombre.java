@@ -4,8 +4,9 @@ import java.util.List;
 
 import co.edu.uco.skilltrade.business.domain.CategoriaDomain;
 
-public interface ConsultarCategoria {
+public interface ConsultarCategoriaPorNombre {
 	
-	List<CategoriaDomain> ejecutar(CategoriaDomain categoria);
+	List<CategoriaDomain> ejecutar(CategoriaDomain usuario);
+	
 	
 }
