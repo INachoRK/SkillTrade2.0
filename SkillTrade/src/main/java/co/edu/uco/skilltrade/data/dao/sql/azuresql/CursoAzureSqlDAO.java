@@ -98,18 +98,21 @@ public final class CursoAzureSqlDAO extends SqlConnection implements CursoDAO {
 		final List<CursoEntity> listaCursos = new ArrayList<>();
 		final var sentenciaSql = new StringBuilder();
 		
-		sentenciaSql.append("SELECT id, titulo, descripcion, categoria ");
-		sentenciaSql.append("FROM dbo.Curso");
+		sentenciaSql.append("SELECT c.titulo, c.descripcion, cat.nombre AS categoria_nombre ");
+		sentenciaSql.append("FROM skilltrade.Curso c ");
+		sentenciaSql.append("JOIN skilltrade.Categoria cat ON c.categoria = cat.id");
+
 		
 		try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {  
             try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
             	
                 while (resultado.next()) {
                 	CursoDTO cursoTemp = CursoDTO.build();
-                	cursoTemp.setId(UUIDHelper.generateUUIDFromString(resultado.getString("id"))).setTitulo(resultado.getString("titulo")).setDescripcion(resultado.getString("descripcion"))
-                	.setCategoria(CategoriaDTO.build().setNombre(resultado.getString("categoria")));
+                	cursoTemp.setTitulo(resultado.getString("titulo")).setDescripcion(resultado.getString("descripcion"))
+                	.setCategoria(CategoriaDTO.build().setNombre(resultado.getString("categoria_nombre")));
                 	CursoEntity curso = CursoDTOEntityAssembler.obtenerInstancia().ensamblarEntity(cursoTemp);
-					listaCursos.add(curso); 
+					listaCursos.add(curso);
+					
                 }
             }
         } catch (SQLException exception) {

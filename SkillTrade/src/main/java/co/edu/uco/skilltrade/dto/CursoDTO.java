@@ -42,7 +42,7 @@ public final class CursoDTO {
 	}
 	
 	public final CursoDTO setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.generateNewUUID();
 		return this;
 	}
 	

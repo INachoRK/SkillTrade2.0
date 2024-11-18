@@ -20,11 +20,14 @@ import co.edu.uco.skilltrade.business.facade.concrete.RegistrarCursoFachadaImpl;
 import co.edu.uco.skilltrade.crosscutting.exceptions.SkillTradeException;
 import co.edu.uco.skilltrade.dto.CursoDTO;
 
-
-
 @RestController
 @RequestMapping("skilltrade/api/v1/curso")
-@CrossOrigin(origins = "http://127.0.0.1:5501")
+@CrossOrigin(origins = {
+    "http://127.0.0.1:5501", 
+    "http://127.0.0.1:5500",
+    "http://localhost:5501",
+    "http://localhost:5500"
+})
 public final class CursoController {
 	
 	Logger logger = LoggerFactory.getLogger(CursoDTO.class);
@@ -78,32 +81,36 @@ public final class CursoController {
 	
 	
 	@GetMapping
-    public ResponseEntity<Response<CursoDTO>> consultar() {
-        
-		CursoResponse cursoResponse = CursoResponse.build();
-        HttpStatus httpStatusResponse = HttpStatus.OK;
+	public ResponseEntity<Response<CursoDTO>> consultar() {
+	    Response<CursoDTO> response = new Response<>();
+	    HttpStatus statusCode = HttpStatus.OK;
 
-        try {
-        	final var cursoDtoFilter = CursoDTO.build();
-            
-            fachada = new ConsultarCursoFachadaImpl();
-            fachada.ejecutar(cursoDtoFilter);
-            
-            final List<CursoDTO> datosCurso = fachada.ejecutar(cursoDtoFilter);
-            cursoResponse.setDatos(datosCurso);
-            cursoResponse.getMensajes().add("Cursos consultadas exitosamente");
-               
-               
-        } catch (final SkillTradeException exception) {
-            logger.error("Error de negocio: ", exception);
-            cursoResponse.getMensajes().add(exception.getMensajeUsuario());
-            httpStatusResponse = HttpStatus.BAD_REQUEST;
-        } catch (final Exception exception) {
-            logger.error("Error inesperado: ", exception);
-            cursoResponse.getMensajes().add("Se ha presentado un problema inesperado");
-            httpStatusResponse = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(cursoResponse, httpStatusResponse);
-    }
+	    try {
+	        logger.info("Iniciando consulta de cursos"); // Debug
+	        final var cursoDtoFilter = CursoDTO.build();
+	        
+	        logger.info("Ejecutando consulta con filtro: {}", cursoDtoFilter); // Debug
+	        final List<CursoDTO> datosCurso = fachada.ejecutar(cursoDtoFilter);
+	        
+	        if (datosCurso != null) {
+	            response.setData(datosCurso);
+	            response.getMessages().add("Cursos consultados exitosamente");
+	            logger.info("Consulta exitosa. Cursos encontrados: {}", datosCurso.size());
+	        } else {
+	            response.getMessages().add("No se encontraron cursos");
+	            logger.info("Consulta exitosa. No se encontraron cursos");
+	        }
+	        
+	    } catch (final SkillTradeException exception) {
+	        statusCode = HttpStatus.BAD_REQUEST;
+	        response.getMessages().add(exception.getMensajeUsuario());
+	        logger.error("Error de negocio en consulta de cursos: {}", exception.getMessage(), exception);
+	    } catch (final Exception exception) {
+	        statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+	        response.getMessages().add("Se ha presentado un problema inesperado al consultar los cursos");
+	        logger.error("Error inesperado en consulta de cursos: ", exception);
+	    }
 
+	    return new ResponseEntity<>(response, statusCode);
+	}
 }

@@ -66,7 +66,7 @@ public final class CategoriaAzureSqlDAO extends SqlConnection implements Categor
         final StringBuilder sentenciaSql = new StringBuilder();
         
 
-        sentenciaSql.append("SELECT id ");
+        sentenciaSql.append("SELECT id, nombre ");
         sentenciaSql.append("FROM skilltrade.categoria ");
         sentenciaSql.append("WHERE nombre = ?");
         

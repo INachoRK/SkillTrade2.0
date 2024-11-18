@@ -19,8 +19,8 @@ public final class CategoriaValidation implements Validation<String> {
 	public final Result execute(String data) {
 		var result = Result.create();
 
-		if (TextHelper.isNullOrEmpty(data)) {
-			result.addMessage("No es posible continuar con la descripcion vacio");
+		if (data == "Categoría") {
+			result.addMessage("No es posible continuar con la categoria vacía");
 		} 
 
 		return result;

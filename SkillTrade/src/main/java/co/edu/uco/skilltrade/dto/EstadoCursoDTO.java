@@ -15,7 +15,6 @@ public final class EstadoCursoDTO {
 		setNombre(TextHelper.EMPTY);
 	}
 	
-	
 	private EstadoCursoDTO(UUID id, String nombre) {
 		setId(id);
 		setNombre(nombre);
@@ -26,7 +25,7 @@ public final class EstadoCursoDTO {
 	}
 	
 	public static final EstadoCursoDTO build() {
-		return new EstadoCursoDTO(UUIDHelper.DEFAULT_UUID);
+		return new EstadoCursoDTO(UUIDHelper.DEFAULT_UUID, TextHelper.EMPTY);
 	}
 
 	public UUID getId() {
